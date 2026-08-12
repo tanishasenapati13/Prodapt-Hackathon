@@ -1,0 +1,118 @@
+[
+  {
+    "resume_id": "res_001",
+    "candidate_name": "Rahul Yadav",
+    "email": "rahul.sharma@gmail.com",
+    "resume_filename": "rahul_sharma.pdf",
+    "job_description_id": "jd_203",
+    "job_title": "Backend Engineer",
+    "status": "scored",
+    "overall_match_percentage": 82.47,
+    "vector_similarity_score": 0.874,
+    "analysis": {
+      "matched_skills": [
+        "python",
+        "sql",
+        "fastapi",
+        "docker"
+      ],
+      "partial_skills": [],
+      "missing_skills": [
+        "aws"
+      ],
+      "strengths": [
+        "python",
+        "sql",
+        "fastapi",
+        "docker"
+      ],
+      "gaps": [
+        "aws"
+      ],
+      "ai_rationale": "Candidate matches 4 of 5 required skills. Hybrid match score is 82.47%.",
+      "hiring_recommendation": "Shortlist"
+    },
+    "processed_at": "2026-08-12T05:25:31.482913+00:00",
+    "rank": 1
+  },
+  {
+    "resume_id": "res_002",
+    "candidate_name": "Priya Sharma",
+    "email": "priya.menon@gmail.com",
+    "resume_filename": "priya_menon.pdf",
+    "job_description_id": "jd_203",
+    "job_title": "Backend Engineer",
+    "status": "scored",
+    "overall_match_percentage": 74.31,
+    "vector_similarity_score": 0.808,
+    "analysis": {
+      "matched_skills": [
+        "python",
+        "sql",
+        "docker"
+      ],
+      "partial_skills": [
+        {
+          "required_skill": "fastapi",
+          "resume_skill": "flask",
+          "similarity": 0.734
+        }
+      ],
+      "missing_skills": [
+        "aws"
+      ],
+      "strengths": [
+        "python",
+        "sql",
+        "docker"
+      ],
+      "gaps": [
+        "aws"
+      ],
+      "ai_rationale": "Candidate matches 3 of 5 required skills. Hybrid match score is 74.31%.",
+      "hiring_recommendation": "Consider"
+    },
+    "processed_at": "2026-08-12T05:25:32.129482+00:00",
+    "rank": 2
+  },
+  {
+    "resume_id": "res_003",
+    "candidate_name": "Arjun Kapoor",
+    "email": "arjun.kapoor@gmail.com",
+    "resume_filename": "arjun_kapoor.pdf",
+    "job_description_id": "jd_203",
+    "job_title": "Backend Engineer",
+    "status": "scored",
+    "overall_match_percentage": 58.62,
+    "vector_similarity_score": 0.692,
+    "analysis": {
+      "matched_skills": [
+        "python",
+        "sql"
+      ],
+      "partial_skills": [
+        {
+          "required_skill": "fastapi",
+          "resume_skill": "flask",
+          "similarity": 0.721
+        }
+      ],
+      "missing_skills": [
+        "docker",
+        "aws"
+      ],
+      "strengths": [
+        "python",
+        "sql"
+      ],
+      "gaps": [
+        "docker",
+        "aws"
+      ],
+      "ai_rationale": "Candidate matches 2 of 5 required skills. Hybrid match score is 58.62%.",
+      "hiring_recommendation": "Reject"
+    },
+    "processed_at": "2026-08-12T05:25:33.742891+00:00",
+    "rank": 3
+  }
+]

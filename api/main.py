@@ -19,25 +19,22 @@ import sys
 import logging
 from contextlib import asynccontextmanager
 
-# Ensure api package is importable when running from project root
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
 from api.routes import matching, resume, candidates
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(asctime)s %(name)s %(message)s")
 logger = logging.getLogger("api")
 
-
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    from api.data.store import SCORED_RESULTS
-    logger.info("Resume Screening API started — serving %d pre-loaded results", len(SCORED_RESULTS))
+    from api.data.store import get_all_results
+    results = get_all_results()
+    logger.info("Resume Screening API started — serving %d pre-loaded results from results.json", len(results))
     yield
     logger.info("Resume Screening API shutting down")
-
 
 app = FastAPI(
     title="AI Resume Screening API",
@@ -57,7 +54,6 @@ app.add_middleware(
 app.include_router(matching.router)
 app.include_router(resume.router)
 app.include_router(candidates.router)
-
 
 @app.get("/", tags=["Health"])
 async def health():

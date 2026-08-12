@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Detailed candidate analysis — skill match breakdown, gap analysis, and AI-powered insights.">
+    <title>{{ candidate.candidate_name|default:"Candidate" }} | Screening Dashboard</title>
+
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'dashboard/dashboard.css' %}">
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar navbar-expand-lg navbar-dark border-bottom border-secondary/20 sticky-top" id="detail-nav">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'dashboard:results' %}">
+                <div class="brand-icon">
+                    <i class="bi bi-cpu"></i>
+                </div>
+                <span class="fw-700">ResumeAI</span>
+            </a>
+            <div class="d-flex align-items-center">
+                <a href="{% url 'dashboard:results' %}" class="btn btn-sm btn-outline-secondary rounded-pill px-3" id="back-btn">
+                    <i class="bi bi-arrow-left me-1"></i>Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="container-fluid px-4 py-4">
+
+        {% if error_message %}
+        <div class="alert alert-danger d-flex align-items-center gap-2 glass-card border-danger/30 mb-4" role="alert" id="detail-error-banner">
+            <i class="bi bi-exclamation-triangle-fill fs-4"></i>
+            <div>
+                <strong>Error:</strong> {{ error_message }}
+            </div>
+        </div>
+        {% elif candidate %}
+
+        <!-- ===== CANDIDATE HEADER ===== -->
+        <div class="glass-card p-4 mb-4" id="candidate-header">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="avatar-circle avatar-lg">
+                            {{ candidate.candidate_name|first }}
+                        </div>
+                        <div>
+                            <h1 class="h4 fw-700 mb-1" id="candidate-name">{{ candidate.candidate_name }}</h1>
+                            <div class="text-muted fs-7">
+                                {% if candidate.education %}
+                                <i class="bi bi-mortarboard me-1"></i>{{ candidate.education }}
+                                {% endif %}
+                                {% if candidate.experience_years %}
+                                <span class="mx-2">&middot;</span>
+                                <i class="bi bi-briefcase me-1"></i>{{ candidate.experience_years }} years experience
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <div class="score-ring-container" id="overall-score">
+                        <div class="score-ring
+                            {% if candidate.score >= 85 %}ring-high
+                            {% elif candidate.score >= 70 %}ring-mid
+                            {% else %}ring-low{% endif %}">
+                            <div class="score-ring-value">{{ candidate.score }}%</div>
+                            <div class="score-ring-label">Match Score</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== INSIGHT BANNER ===== -->
+        <div class="glass-card p-4 mb-4 insight-card" id="insight-section">
+            <h2 class="h6 fw-600 mb-2">
+                <i class="bi bi-lightbulb-fill text-warning me-2"></i>AI Insight
+            </h2>
+            <p class="mb-0 text-secondary-emphasis lh-lg">{{ candidate.insight_text }}</p>
+        </div>
+
+        <!-- ===== CHARTS ROW ===== -->
+        <div class="row g-3 mb-4" id="detail-charts">
+            <div class="col-lg-6">
+                <div class="glass-card p-4 h-100">
+                    <h2 class="h6 fw-600 mb-3">
+                        <i class="bi bi-radar me-2 text-primary"></i>Skill Proficiency
+                    </h2>
+                    <div class="chart-container chart-container-md">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="glass-card p-4 h-100">
+                    <h2 class="h6 fw-600 mb-3">
+                        <i class="bi bi-exclamation-diamond me-2 text-danger"></i>Gap Severity
+                    </h2>
+                    <div class="chart-container chart-container-md">
+                        <canvas id="gapChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== MATCHED SKILLS TABLE ===== -->
+        <div class="glass-card p-4 mb-4" id="skills-section">
+            <h2 class="h6 fw-600 mb-3">
+                <i class="bi bi-check2-all text-success me-2"></i>Matched Skills
+                <span class="badge bg-success-subtle text-success rounded-pill ms-2">
+                    {{ candidate.matched_skills|length }}
+                </span>
+            </h2>
+            <div class="row g-3">
+                {% for skill in candidate.matched_skills %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="skill-detail-card">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h3 class="h6 fw-600 mb-0">{{ skill.skill }}</h3>
+                            <span class="proficiency-badge
+                                {% if skill.proficiency == 'expert' %}prof-expert
+                                {% elif skill.proficiency == 'advanced' %}prof-advanced
+                                {% else %}prof-intermediate{% endif %}">
+                                {{ skill.proficiency|title }}
+                            </span>
+                        </div>
+                        <p class="text-muted fs-8 mb-0">{{ skill.evidence }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- ===== GAPS TABLE ===== -->
+        {% if candidate.gaps %}
+        <div class="glass-card p-4 mb-4" id="gaps-section">
+            <h2 class="h6 fw-600 mb-3">
+                <i class="bi bi-exclamation-triangle text-warning me-2"></i>Skill Gaps
+                <span class="badge bg-warning-subtle text-warning rounded-pill ms-2">
+                    {{ candidate.gaps|length }}
+                </span>
+            </h2>
+            <div class="row g-3">
+                {% for gap in candidate.gaps %}
+                <div class="col-md-6">
+                    <div class="gap-detail-card
+                        {% if gap.importance == 'critical' %}gap-critical
+                        {% elif gap.importance == 'high' %}gap-high
+                        {% elif gap.importance == 'medium' %}gap-medium
+                        {% else %}gap-low{% endif %}">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h3 class="h6 fw-600 mb-0">{{ gap.skill }}</h3>
+                            <span class="importance-badge importance-{{ gap.importance }}">
+                                {{ gap.importance|title }}
+                            </span>
+                        </div>
+                        <p class="text-muted fs-8 mb-0">
+                            <i class="bi bi-arrow-right-circle me-1"></i>{{ gap.recommendation }}
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% else %}
+        <!-- No candidate data -->
+        <div class="text-center py-5 text-muted">
+            <i class="bi bi-person-x fs-1 d-block mb-2"></i>
+            <p>Candidate not found.</p>
+            <a href="{% url 'dashboard:results' %}" class="btn btn-outline-primary rounded-pill">
+                <i class="bi bi-arrow-left me-1"></i>Back to Dashboard
+            </a>
+        </div>
+        {% endif %}
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="border-top border-secondary/20 py-3 mt-4">
+        <div class="container-fluid px-4 text-center text-muted fs-8">
+            AI Resume Screening Assistant — Group 27 &middot; Prodapt Hackathon 2026
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <!-- Custom Charts -->
+    {% if candidate %}
+    <script>
+        window.candidateData = {
+            skillNames: {{ skill_names|safe }},
+            skillLevels: {{ skill_levels|safe }},
+            gapNames: {{ gap_names|safe }},
+            gapImportances: {{ gap_importances|safe }},
+            score: {{ candidate.score }},
+        };
+    </script>
+    {% endif %}
+    <script src="{% static 'dashboard/charts.js' %}"></script>
+
+</body>
+</html>

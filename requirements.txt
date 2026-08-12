@@ -1,0 +1,8 @@
+# Person 4 — Dashboard App Dependencies
+# Core
+django>=5.2,<5.3
+httpx>=0.28,<0.29
+python-dotenv>=1.0,<2.0
+
+# Testing (included with Django, listed for clarity)
+# pytest  # optional, Django's test runner is sufficient

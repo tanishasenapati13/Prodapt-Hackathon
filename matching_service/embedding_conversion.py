@@ -4,7 +4,7 @@ import faiss
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
-RESUME_DIR = "resumes"
+RESUME_FILE = "output/extracted_resumes.json"
 JD_FILE = "data/jd.json"
 VECTOR_DIR = "vector_store"
 
@@ -19,35 +19,45 @@ print("Loading embedding model...")
 model = SentenceTransformer(MODEL_NAME)
 print("Embedding model loaded.")
 
+def load_resumes():
+    possible_paths = [
+        "output/extracted_resumes.json",
+        "data/extracted_resumes.json",
+        "extracted_resumes.json"
+    ]
+    for path in possible_paths:
+        if os.path.exists(path):
+            with open(path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                if isinstance(data, list):
+                    return data
+
+    resumes = []
+    resume_dir = "resumes" if os.path.exists("resumes") else "data/resumes"
+    if os.path.exists(resume_dir):
+        for filename in os.listdir(resume_dir):
+            if filename.endswith(".json"):
+                with open(os.path.join(resume_dir, filename), "r", encoding="utf-8") as f:
+                    resumes.append(json.load(f))
+    return resumes
+
 def resume_to_text(resume):
+    if resume.get("full_text"):
+        return resume["full_text"]
+
     parts = []
-    candidate_name = resume.get("candidate_name", "")
-    parts.append(f"Candidate: {candidate_name}")
+    candidate_name = resume.get("candidate", {}).get("name") or resume.get("candidate_name", "")
+    if candidate_name:
+        parts.append(f"Candidate: {candidate_name}")
 
     skills = resume.get("skills", [])
     if skills:
-        parts.append("Skills: " + ", ".join(skills))
+        parts.append("Skills: " + ", ".join(str(s) for s in skills))
 
-    experience = resume.get("experience", [])
-    for exp in experience:
-        role = exp.get("role", "")
-        company = exp.get("company", "")
-        description = exp.get("description", "")
-        parts.append(f"Experience:\nRole: {role}\nCompany: {company}\nDescription: {description}")
-
-    projects = resume.get("projects", [])
-    for project in projects:
-        name = project.get("name", "")
-        description = project.get("description", "")
-        parts.append(f"Project:\nName: {name}\nDescription: {description}")
-
-    education = resume.get("education", [])
-    if education:
-        parts.append("Education: " + ", ".join(str(x) for x in education))
-
-    certifications = resume.get("certifications", [])
-    if certifications:
-        parts.append("Certifications: " + ", ".join(str(x) for x in certifications))
+    sections = resume.get("sections", {})
+    for sec_name, sec_content in sections.items():
+        if sec_content:
+            parts.append(f"{sec_name.capitalize()}:\n{sec_content}")
 
     return "\n".join(parts)
 
@@ -97,21 +107,6 @@ def jd_to_text(jd):
 
     return "\n".join(parts)
 
-def load_resumes():
-    resumes = []
-    if not os.path.exists(RESUME_DIR):
-        return resumes
-    for filename in os.listdir(RESUME_DIR):
-        if not filename.endswith(".json"):
-            continue
-        filepath = os.path.join(RESUME_DIR, filename)
-        try:
-            with open(filepath, "r", encoding="utf-8") as f:
-                resumes.append(json.load(f))
-        except Exception as e:
-            print(f"Could not load {filename}: {e}")
-    return resumes
-
 def create_resume_vector_store(resumes):
     print(f"\nCreating embeddings for {len(resumes)} resumes...")
     resume_texts = []
@@ -120,11 +115,19 @@ def create_resume_vector_store(resumes):
     for vector_id, resume in enumerate(resumes):
         text = resume_to_text(resume)
         resume_texts.append(text)
+
+        resume_id = resume.get("resume_id")
+        candidate_name = resume.get("candidate", {}).get("name") or resume.get("candidate_name", "")
+        emails = resume.get("candidate", {}).get("emails") or []
+        email = emails[0] if emails else (resume.get("email") or resume.get("candidate_email") or "")
+        filename = resume.get("file", {}).get("filename") or resume.get("resume_filename") or f"{resume_id}.pdf"
+
         metadata.append({
             "vector_id": vector_id,
-            "resume_id": resume.get("resume_id"),
-            "candidate_name": resume.get("candidate_name"),
-            "resume_filename": resume.get("resume_filename")
+            "resume_id": resume_id,
+            "candidate_name": candidate_name,
+            "email": email,
+            "resume_filename": filename
         })
 
     embeddings = model.encode(resume_texts, normalize_embeddings=True, show_progress_bar=True)
@@ -171,7 +174,7 @@ def main():
     print("\nLoading resumes...")
     resumes = load_resumes()
     if not resumes:
-        raise ValueError("No resume JSON files found.")
+        raise ValueError("No extracted resumes JSON found.")
     print(f"Found {len(resumes)} resumes.")
 
     create_resume_vector_store(resumes)

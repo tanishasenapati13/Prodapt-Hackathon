@@ -1,11 +1,11 @@
 import os
 import json
+import re
 from datetime import datetime, timezone
 import numpy as np
 import faiss
 from sentence_transformers import SentenceTransformer
 
-RESUME_DIR = "resumes" if os.path.exists("resumes") else "data/resumes"
 JD_FILE = "data/jd.json"
 FAISS_INDEX_FILE = "vector_store/resumes.faiss"
 RESUME_METADATA_FILE = "vector_store/resume_metadata.json"
@@ -40,8 +40,33 @@ def normalize_skill(skill):
     }
     return replacements.get(skill, skill)
 
-def normalize_skills(skills):
-    return {normalize_skill(s) for s in skills}
+def extract_resume_skill_set(resume):
+    raw_skills = resume.get("skills", [])
+    full_text = resume.get("full_text", "")
+    
+    combined_tokens = set()
+    for s in raw_skills:
+        # Split tokens on common delimiters
+        parts = re.split(r'[,:;•/|\n]', str(s))
+        for p in parts:
+            p_clean = p.strip()
+            if p_clean and len(p_clean) < 40:
+                combined_tokens.add(normalize_skill(p_clean))
+
+    if full_text:
+        text_lower = full_text.lower()
+        common_tech_skills = [
+            "python", "java", "c++", "c", "javascript", "typescript", "react", "node", "fastapi",
+            "django", "flask", "sql", "postgresql", "mysql", "mongodb", "redis", "docker",
+            "kubernetes", "aws", "azure", "gcp", "git", "github", "ci/cd", "linux", "rest api",
+            "rest apis", "microservices", "pytorch", "tensorflow", "pandas", "numpy", "scikit-learn",
+            "machine learning", "nlp", "langchain", "tableau", "hadoop", "r"
+        ]
+        for skill in common_tech_skills:
+            if re.search(rf'\b{re.escape(skill)}\b', text_lower):
+                combined_tokens.add(normalize_skill(skill))
+
+    return combined_tokens
 
 def cosine_similarity(a, b):
     a = np.asarray(a).flatten()
@@ -52,17 +77,33 @@ def cosine_similarity(a, b):
 def clamp(val, min_val=0, max_val=100):
     return max(min_val, min(max_val, val))
 
+def load_resumes():
+    possible_paths = [
+        "output/extracted_resumes.json",
+        "data/extracted_resumes.json",
+        "extracted_resumes.json"
+    ]
+    for path in possible_paths:
+        if os.path.exists(path):
+            with open(path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                if isinstance(data, list):
+                    return data
+
+    resumes = []
+    resume_dir = "resumes" if os.path.exists("resumes") else "data/resumes"
+    if os.path.exists(resume_dir):
+        for filename in os.listdir(resume_dir):
+            if filename.endswith(".json"):
+                with open(os.path.join(resume_dir, filename), "r", encoding="utf-8") as f:
+                    resumes.append(json.load(f))
+    return resumes
+
 def load_data():
     with open(JD_FILE, "r", encoding="utf-8") as f:
         jd = json.load(f)
 
-    resumes = []
-    if os.path.exists(RESUME_DIR):
-        for filename in os.listdir(RESUME_DIR):
-            if filename.endswith(".json"):
-                with open(os.path.join(RESUME_DIR, filename), "r", encoding="utf-8") as f:
-                    resumes.append(json.load(f))
-
+    resumes = load_resumes()
     index = faiss.read_index(FAISS_INDEX_FILE)
 
     with open(RESUME_METADATA_FILE, "r", encoding="utf-8") as f:
@@ -72,14 +113,13 @@ def load_data():
 
     return jd, resumes, index, resume_metadata, jd_vector
 
-def compare_skills(resume_skills, required_skills):
-    res_norm = normalize_skills(resume_skills)
-    req_norm = normalize_skills(required_skills)
+def compare_skills(resume_skill_set, required_skills):
+    req_norm = [normalize_skill(s) for s in required_skills]
 
-    matched = [s for s in req_norm if s in res_norm]
-    missing_initial = [s for s in req_norm if s not in res_norm]
+    matched = [s for s in req_norm if s in resume_skill_set]
+    missing_initial = [s for s in req_norm if s not in resume_skill_set]
 
-    res_skill_list = list(res_norm)
+    res_skill_list = list(resume_skill_set)
     res_embeddings = model.encode(res_skill_list, normalize_embeddings=True) if res_skill_list else []
 
     partial = []
@@ -126,21 +166,6 @@ def get_vector_similarity(resume_id, index, resume_metadata, jd_vector):
     resume_vec = index.reconstruct(int(vec_id))
     return cosine_similarity(jd_vector, resume_vec)
 
-def generate_strengths(matched, partial):
-    if matched:
-        return ["Strong match across required skills: " + ", ".join(matched[:5])]
-    if partial:
-        return ["Has related experience for some required skills."]
-    return ["Limited direct skill alignment with the job requirements."]
-
-def generate_gaps(missing, partial):
-    gaps = []
-    if missing:
-        gaps.append("Missing required skills: " + ", ".join(missing[:5]))
-    if partial:
-        gaps.append("Some required skills have only partial/related matches.")
-    return gaps
-
 def get_recommendation(score):
     if score >= SHORTLIST_THRESHOLD:
         return "Shortlist"
@@ -150,10 +175,19 @@ def get_recommendation(score):
 
 def match_single_resume(resume, jd, index, resume_metadata, jd_vector):
     resume_id = resume.get("resume_id")
-    req_skills = jd.get("required_skills", [])
-    res_skills = resume.get("skills", [])
+    
+    cand_info = resume.get("candidate") or {}
+    candidate_name = cand_info.get("name") or resume.get("candidate_name") or "Candidate"
+    emails = cand_info.get("emails") or []
+    email = emails[0] if emails else (resume.get("email") or resume.get("candidate_email") or "")
+    
+    file_info = resume.get("file") or {}
+    filename = file_info.get("filename") or resume.get("resume_filename") or f"{resume_id}.pdf"
 
-    matched, partial, missing = compare_skills(res_skills, req_skills)
+    req_skills = jd.get("required_skills", [])
+    resume_skill_set = extract_resume_skill_set(resume)
+
+    matched, partial, missing = compare_skills(resume_skill_set, req_skills)
     skill_score = calculate_skill_score(matched, partial, req_skills)
     vec_sim = get_vector_similarity(resume_id, index, resume_metadata, jd_vector)
     vec_score = vec_sim * 100
@@ -162,8 +196,9 @@ def match_single_resume(resume, jd, index, resume_metadata, jd_vector):
 
     return {
         "resume_id": resume_id,
-        "candidate_name": resume.get("candidate_name"),
-        "resume_filename": resume.get("resume_filename"),
+        "candidate_name": candidate_name,
+        "email": email,
+        "resume_filename": filename,
         "job_description_id": jd.get("job_description_id"),
         "job_title": jd.get("job_title"),
         "status": "scored",
@@ -173,8 +208,8 @@ def match_single_resume(resume, jd, index, resume_metadata, jd_vector):
             "matched_skills": matched,
             "partial_skills": partial,
             "missing_skills": missing,
-            "strengths": generate_strengths(matched, partial),
-            "gaps": generate_gaps(missing, partial),
+            "strengths": matched,
+            "gaps": missing,
             "ai_rationale": f"Candidate matches {len(matched)} of {len(req_skills)} required skills. Hybrid match score is {overall_score}%.",
             "hiring_recommendation": get_recommendation(overall_score)
         },
@@ -184,7 +219,7 @@ def match_single_resume(resume, jd, index, resume_metadata, jd_vector):
 def main():
     print("Loading pre-processed data & vectors...")
     jd, resumes, index, resume_metadata, jd_vector = load_data()
-    print(f"Loaded {len(resumes)} resumes and pre-computed FAISS vector index.")
+    print(f"Loaded {len(resumes)} resumes from extracted schema and pre-computed FAISS vector index.")
 
     results = []
     for resume in resumes:
@@ -192,9 +227,11 @@ def main():
         try:
             results.append(match_single_resume(resume, jd, index, resume_metadata, jd_vector))
         except Exception as e:
+            cand_info = resume.get("candidate") or {}
             results.append({
                 "resume_id": resume_id,
-                "candidate_name": resume.get("candidate_name"),
+                "candidate_name": cand_info.get("name") or resume.get("candidate_name"),
+                "email": (cand_info.get("emails") or [""])[0] or resume.get("email") or "",
                 "status": "failed",
                 "error": str(e),
                 "processed_at": datetime.now(timezone.utc).isoformat()
@@ -212,7 +249,7 @@ def main():
     print(f"Matching complete. Results saved to {OUTPUT_FILE}")
     print("\nCandidate Rankings:")
     for item in scored:
-        print(f"{item['rank']}. {item['candidate_name']} → {item['overall_match_percentage']}% ({item['analysis']['hiring_recommendation']})")
+        print(f"{item['rank']}. {item['candidate_name']} ({item['email']}) → {item['overall_match_percentage']}% ({item['analysis']['hiring_recommendation']})")
 
 if __name__ == "__main__":
     main()

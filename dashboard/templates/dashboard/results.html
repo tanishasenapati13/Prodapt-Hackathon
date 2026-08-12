@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI-powered resume screening dashboard — ranked candidates with skill-match scoring and gap analysis.">
+    <title>Screening Dashboard | AI Resume Screening Assistant</title>
+
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'dashboard/dashboard.css' %}">
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar navbar-expand-lg navbar-dark border-bottom border-secondary/20 sticky-top" id="main-nav">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'dashboard:results' %}">
+                <div class="brand-icon">
+                    <i class="bi bi-cpu"></i>
+                </div>
+                <span class="fw-700">ResumeAI</span>
+                <span class="badge bg-accent-gradient rounded-pill ms-2 px-2 py-1 fs-8">Dashboard</span>
+            </a>
+            <div class="d-flex align-items-center gap-3">
+                <span class="text-muted fs-7">
+                    <i class="bi bi-clock me-1"></i>Last updated: just now
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="container-fluid px-4 py-4">
+
+        {% if error_message %}
+        <!-- Error Banner -->
+        <div class="alert alert-danger d-flex align-items-center gap-2 glass-card border-danger/30 mb-4" role="alert" id="error-banner">
+            <i class="bi bi-exclamation-triangle-fill fs-4"></i>
+            <div>
+                <strong>Error:</strong> {{ error_message }}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- ===== STATS ROW ===== -->
+        <div class="row g-3 mb-4" id="stats-row">
+            <div class="col-6 col-md-3">
+                <div class="stat-card glass-card p-3">
+                    <div class="stat-icon bg-primary-subtle">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="stat-total">{{ total_candidates }}</div>
+                        <div class="stat-label">Total Candidates</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-card glass-card p-3">
+                    <div class="stat-icon bg-success-subtle">
+                        <i class="bi bi-check-circle-fill"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="stat-completed">{{ completed_count }}</div>
+                        <div class="stat-label">Processed</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-card glass-card p-3">
+                    <div class="stat-icon bg-warning-subtle">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="stat-avg">{{ avg_score }}%</div>
+                        <div class="stat-label">Avg Score</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-card glass-card p-3">
+                    <div class="stat-icon bg-info-subtle">
+                        <i class="bi bi-trophy-fill"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="stat-top">{{ top_score }}%</div>
+                        <div class="stat-label">Top Score</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CHARTS ROW ===== -->
+        <div class="row g-3 mb-4" id="charts-row">
+            <div class="col-lg-7">
+                <div class="glass-card p-4 h-100">
+                    <h2 class="card-title h6 fw-600 mb-3">
+                        <i class="bi bi-bar-chart-fill text-primary me-2"></i>Candidate Scores
+                    </h2>
+                    <div class="chart-container">
+                        <canvas id="scoresChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="glass-card p-4 h-100">
+                    <h2 class="card-title h6 fw-600 mb-3">
+                        <i class="bi bi-pie-chart-fill text-accent me-2"></i>Skill Distribution
+                    </h2>
+                    <div class="chart-container">
+                        <canvas id="skillsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CANDIDATES TABLE ===== -->
+        <div class="glass-card p-4" id="candidates-section">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="card-title h6 fw-600 mb-0">
+                    <i class="bi bi-person-lines-fill text-primary me-2"></i>Ranked Candidates
+                </h2>
+                {% if error_count > 0 %}
+                <span class="badge bg-danger-subtle text-danger rounded-pill">
+                    <i class="bi bi-exclamation-circle me-1"></i>{{ error_count }} failed
+                </span>
+                {% endif %}
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0" id="candidates-table">
+                    <thead>
+                        <tr class="text-muted fs-7">
+                            <th class="border-0 ps-3" style="width: 50px">#</th>
+                            <th class="border-0">Candidate</th>
+                            <th class="border-0">Score</th>
+                            <th class="border-0">Matched Skills</th>
+                            <th class="border-0">Gaps</th>
+                            <th class="border-0">Status</th>
+                            <th class="border-0 text-end pe-3">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for candidate in candidates %}
+                        <tr class="candidate-row {% if candidate.status == 'error' %}row-error{% endif %}"
+                            id="candidate-row-{{ candidate.candidate_id }}">
+                            <td class="ps-3">
+                                <span class="rank-badge {% if forloop.counter <= 3 and candidate.status != 'error' %}rank-top{% endif %}">
+                                    {{ forloop.counter }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="avatar-circle">
+                                        {{ candidate.candidate_name|first }}
+                                    </div>
+                                    <div>
+                                        <div class="fw-500">{{ candidate.candidate_name }}</div>
+                                        <div class="text-muted fs-8">{{ candidate.email }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                {% if candidate.status == 'error' %}
+                                    <span class="text-danger fw-500">—</span>
+                                {% else %}
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="score-bar-container">
+                                            <div class="score-bar
+                                                {% if candidate.score >= 85 %}score-high
+                                                {% elif candidate.score >= 70 %}score-mid
+                                                {% else %}score-low{% endif %}"
+                                                 style="width: {{ candidate.score }}%"></div>
+                                        </div>
+                                        <span class="fw-600 fs-7
+                                            {% if candidate.score >= 85 %}text-success
+                                            {% elif candidate.score >= 70 %}text-warning
+                                            {% else %}text-danger{% endif %}">
+                                            {{ candidate.score }}%
+                                        </span>
+                                    </div>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="d-flex flex-wrap gap-1">
+                                    {% for skill in candidate.matched_skills|slice:":4" %}
+                                    <span class="skill-tag skill-match">{{ skill }}</span>
+                                    {% endfor %}
+                                    {% if candidate.matched_skills|length > 4 %}
+                                    <span class="skill-tag skill-more">+{{ candidate.matched_skills|length|add:"-4" }}</span>
+                                    {% endif %}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex flex-wrap gap-1">
+                                    {% for gap in candidate.gaps|slice:":3" %}
+                                    <span class="skill-tag skill-gap">{{ gap }}</span>
+                                    {% endfor %}
+                                    {% if candidate.gaps|length > 3 %}
+                                    <span class="skill-tag skill-more">+{{ candidate.gaps|length|add:"-3" }}</span>
+                                    {% endif %}
+                                    {% if not candidate.gaps and candidate.status != 'error' %}
+                                    <span class="text-success fs-8"><i class="bi bi-check-circle"></i> None</span>
+                                    {% endif %}
+                                </div>
+                            </td>
+                            <td>
+                                {% if candidate.status == 'error' %}
+                                <span class="badge bg-danger-subtle text-danger rounded-pill px-2 py-1">
+                                    <i class="bi bi-x-circle me-1"></i>Failed
+                                </span>
+                                {% else %}
+                                <span class="badge bg-success-subtle text-success rounded-pill px-2 py-1">
+                                    <i class="bi bi-check-circle me-1"></i>Done
+                                </span>
+                                {% endif %}
+                            </td>
+                            <td class="text-end pe-3">
+                                {% if candidate.status != 'error' %}
+                                <a href="{% url 'dashboard:candidate_detail' candidate.candidate_id %}"
+                                   class="btn btn-sm btn-outline-primary rounded-pill px-3"
+                                   id="view-btn-{{ candidate.candidate_id }}">
+                                    <i class="bi bi-eye me-1"></i>Details
+                                </a>
+                                {% else %}
+                                <button class="btn btn-sm btn-outline-danger rounded-pill px-3" disabled>
+                                    <i class="bi bi-arrow-repeat me-1"></i>Retry
+                                </button>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="7" class="text-center py-5 text-muted">
+                                <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+                                No candidates to display yet. Upload resumes to get started.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="border-top border-secondary/20 py-3 mt-4">
+        <div class="container-fluid px-4 text-center text-muted fs-8">
+            AI Resume Screening Assistant — Group 27 &middot; Prodapt Hackathon 2026
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <!-- Custom Charts -->
+    <script>
+        // Pass Django template data to JS
+        window.dashboardData = {
+            chartNames: {{ chart_names|safe }},
+            chartScores: {{ chart_scores|safe }},
+            skillLabels: {{ skill_labels|safe }},
+            skillCounts: {{ skill_counts|safe }},
+        };
+    </script>
+    <script src="{% static 'dashboard/charts.js' %}"></script>
+
+</body>
+</html>

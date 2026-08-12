@@ -6,14 +6,19 @@ Views:
   candidate_detail   — full gap analysis for a single candidate
 """
 
+import json
 import logging
 from django.shortcuts import render, get_object_or_404
-from django.http import Http404
+from django.http import Http404, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 
 from .services.mock_data import (
     get_mock_candidates,
     get_mock_candidate_detail,
 )
+from .services.reranker import rerank_matches
+from .services.skill_weights import record_feedback
 
 logger = logging.getLogger("dashboard")
 
@@ -38,6 +43,9 @@ def dashboard_results(request):
             # from asgiref.sync import async_to_sync
             # candidates = async_to_sync(process_resumes_async)(pairs)
             candidates = get_mock_candidates()
+
+        # Apply feedback-based re-ranking
+        candidates = rerank_matches(candidates)
 
         # Compute aggregate stats for the dashboard header
         total = len(candidates)
@@ -145,3 +153,45 @@ def candidate_detail(request, candidate_id):
             "candidate": None,
             "error_message": "Failed to load candidate details. Please try again.",
         })
+
+
+# ---------------------------------------------------------------------------
+# Feedback Loop endpoint
+# ---------------------------------------------------------------------------
+
+@csrf_exempt
+@require_POST
+def submit_feedback(request):
+    """
+    Accept recruiter feedback on a candidate match.
+
+    POST /dashboard/feedback/
+    Body (JSON): {match_id, recruiter_id, feedback, skill_snapshot}
+    """
+    try:
+        data = json.loads(request.body)
+        match_id = data.get("match_id")
+        recruiter_id = int(data.get("recruiter_id", 0))
+        feedback = data.get("feedback")
+        skill_snapshot = data.get("skill_snapshot", [])
+
+        if not match_id or feedback not in ("good_fit", "not_a_fit"):
+            return JsonResponse(
+                {"status": "error", "message": "match_id and valid feedback required"},
+                status=400,
+            )
+
+        record_feedback(match_id, recruiter_id, feedback, skill_snapshot)
+        return JsonResponse({"status": "ok"})
+
+    except (json.JSONDecodeError, ValueError) as e:
+        return JsonResponse(
+            {"status": "error", "message": str(e)},
+            status=400,
+        )
+    except Exception as e:
+        logger.exception("Error processing feedback: %s", str(e))
+        return JsonResponse(
+            {"status": "error", "message": "Internal server error"},
+            status=500,
+        )

@@ -144,6 +144,7 @@
                             <th class="border-0">Matched Skills</th>
                             <th class="border-0">Gaps</th>
                             <th class="border-0">Status</th>
+                            <th class="border-0">Feedback</th>
                             <th class="border-0 text-end pe-3">Actions</th>
                         </tr>
                     </thead>
@@ -185,6 +186,11 @@
                                             {% else %}text-danger{% endif %}">
                                             {{ candidate.score }}%
                                         </span>
+                                        {% if candidate.adjusted_score != candidate.original_score %}
+                                        <span class="adjusted-badge" title="Score adjusted by recruiter feedback">
+                                            {{ candidate.original_score }} → {{ candidate.score }}
+                                        </span>
+                                        {% endif %}
                                     </div>
                                 {% endif %}
                             </td>
@@ -222,6 +228,24 @@
                                 </span>
                                 {% endif %}
                             </td>
+                            <td>
+                                {% if candidate.status != 'error' %}
+                                <div class="d-flex gap-1 feedback-cell" id="feedback-{{ candidate.candidate_id }}">
+                                    <button class="btn btn-sm feedback-btn feedback-btn-good rounded-pill"
+                                            onclick="submitFeedback('{{ candidate.candidate_id }}', 'good_fit', {{ candidate.matched_skills|safe }})"
+                                            title="Good Fit">
+                                        👍
+                                    </button>
+                                    <button class="btn btn-sm feedback-btn feedback-btn-bad rounded-pill"
+                                            onclick="submitFeedback('{{ candidate.candidate_id }}', 'not_a_fit', {{ candidate.matched_skills|safe }})"
+                                            title="Not a Fit">
+                                        👎
+                                    </button>
+                                </div>
+                                {% else %}
+                                <span class="text-muted fs-8">—</span>
+                                {% endif %}
+                            </td>
                             <td class="text-end pe-3">
                                 {% if candidate.status != 'error' %}
                                 <a href="{% url 'dashboard:candidate_detail' candidate.candidate_id %}"
@@ -238,7 +262,7 @@
                         </tr>
                         {% empty %}
                         <tr>
-                            <td colspan="7" class="text-center py-5 text-muted">
+                            <td colspan="8" class="text-center py-5 text-muted">
                                 <i class="bi bi-inbox fs-1 d-block mb-2"></i>
                                 No candidates to display yet. Upload resumes to get started.
                             </td>
@@ -271,6 +295,44 @@
             skillLabels: {{ skill_labels|safe }},
             skillCounts: {{ skill_counts|safe }},
         };
+
+        // --- Feedback Loop ---
+        function submitFeedback(matchId, feedback, skills) {
+            const cell = document.getElementById('feedback-' + matchId);
+            if (!cell) return;
+
+            // Disable buttons immediately
+            const buttons = cell.querySelectorAll('button');
+            buttons.forEach(btn => btn.disabled = true);
+
+            fetch('{% url "dashboard:feedback" %}', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    match_id: matchId,
+                    recruiter_id: 0,
+                    feedback: feedback,
+                    skill_snapshot: skills,
+                }),
+            })
+            .then(resp => resp.json())
+            .then(data => {
+                if (data.status === 'ok') {
+                    // Show confirmation state
+                    const label = feedback === 'good_fit' ? '👍 Good Fit' : '👎 Not a Fit';
+                    const cls = feedback === 'good_fit'
+                        ? 'feedback-submitted feedback-submitted-good'
+                        : 'feedback-submitted feedback-submitted-bad';
+                    cell.innerHTML = '<span class="' + cls + '">' + label + ' ✓</span>';
+                } else {
+                    // Re-enable on error
+                    buttons.forEach(btn => btn.disabled = false);
+                }
+            })
+            .catch(() => {
+                buttons.forEach(btn => btn.disabled = false);
+            });
+        }
     </script>
     <script src="{% static 'dashboard/charts.js' %}"></script>
 

@@ -123,12 +123,19 @@ dashboard/
 │   ├── mock_data.py
 │   ├── fastapi_client.py
 │   ├── batch_processor.py
-│   └── cache.py
+│   ├── cache.py
+│   ├── skill_weights.py    ← NEW (Feedback Loop)
+│   └── reranker.py         ← NEW (Feedback Loop)
 ├── tests/
 │   ├── __init__.py
 │   ├── test_batch_processor.py
 │   ├── test_cache.py
-│   └── test_views.py
+│   ├── test_views.py
+│   ├── test_skill_weights.py   ← NEW (Feedback Loop)
+│   ├── test_reranker.py        ← NEW (Feedback Loop)
+│   └── test_feedback_view.py   ← NEW (Feedback Loop)
+├── management/commands/
+│   └── seed_demo_feedback.py   ← NEW (Feedback Loop)
 └── postman/
     └── resume_screening.postman_collection.json
 
@@ -150,3 +157,57 @@ render.yaml
 Root-level shared files touched:
 - `config/urls.py` — one line: `path('dashboard/', include('dashboard.urls'))`
 - `config/settings.py` — one line: `'dashboard'` in `INSTALLED_APPS`
+
+---
+
+## 🔄 Feedback Loop Feature
+
+**Branch:** `feedback-loop`
+**Status:** ✅ Complete — 50 tests passing (28 existing + 22 new)
+
+### What It Does
+
+Recruiters can mark a candidate match as "👍 Good Fit" or "👎 Not a Fit" directly from the results page. Each feedback event adjusts per-skill weight multipliers, which are then used to re-rank candidate scores on future page loads — no model retraining needed.
+
+### How It Works
+
+1. **Feedback buttons** on each candidate row → POST to `/dashboard/feedback/` via `fetch()` (no page reload)
+2. **Skill weights** are adjusted: `good_fit` → `+0.05` per matched skill (capped at `2.0`), `not_a_fit` → `-0.05` (floored at `0.3`)
+3. **Re-ranker** computes `adjusted_score = original_score × avg(skill_weights)`, clamped to `[0, 100]`
+4. Results page shows both original and adjusted scores when they differ (e.g., `82 → 85`)
+
+### New Files
+
+| File | Purpose |
+|---|---|
+| `dashboard/models.py` | Added `MatchFeedback` + `SkillWeightSnapshot` models |
+| `dashboard/services/skill_weights.py` | Skill weight CRUD + feedback recording |
+| `dashboard/services/reranker.py` | Score adjustment + re-sorting |
+| `dashboard/tests/test_skill_weights.py` | 8 tests for weight logic |
+| `dashboard/tests/test_reranker.py` | 8 tests for reranking |
+| `dashboard/tests/test_feedback_view.py` | 6 tests for the POST endpoint |
+| `dashboard/management/commands/seed_demo_feedback.py` | Demo data seeder |
+
+### Modified Files (append-only to minimize merge conflicts)
+
+| File | Change |
+|---|---|
+| `dashboard/views.py` | Added `submit_feedback` view + `rerank_matches()` call |
+| `dashboard/urls.py` | Added `path("feedback/", ...)` |
+| `dashboard/templates/dashboard/results.html` | Feedback buttons + adjusted score badge + JS |
+| `dashboard/static/dashboard/dashboard.css` | Feedback button + badge styles |
+
+### Demo Command
+
+```bash
+python manage.py seed_demo_feedback         # seed fake feedback
+python manage.py seed_demo_feedback --reset  # clear + re-seed
+```
+
+### ⚠️ Design Decisions (Flagged)
+
+1. **Delta values:** `+/-0.05` per feedback event — tune as needed
+2. **Weight bounds:** Min `0.3`, Max `2.0`
+3. **Recruiter ID:** Plain `IntegerField(default=0)` — wire to `auth.User` FK when auth is set up
+4. **CSRF:** `@csrf_exempt` on the feedback endpoint (acceptable for hackathon demo; add CSRF token handling for production)
+

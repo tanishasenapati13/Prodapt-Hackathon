@@ -293,10 +293,10 @@ def main():
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2)
 
-    print(f"Matching complete. Results saved to {OUTPUT_FILE}")
-    print("\nCandidate Rankings:")
-    for item in scored:
-        print(f"{item['rank']}. {item['candidate_name']} ({item['email']}) → {item['overall_match_percentage']}% ({item['analysis']['hiring_recommendation']})")
+    # print(f"Matching complete. Results saved to {OUTPUT_FILE}")
+    # print("\nCandidate Rankings:")
+    # for item in scored:
+        # print(f"{item['rank']}. {item['candidate_name']} ({item['email']}) → {item['overall_match_percentage']}% ({item['analysis']['hiring_recommendation']})")
 
 if __name__ == "__main__":
     main()

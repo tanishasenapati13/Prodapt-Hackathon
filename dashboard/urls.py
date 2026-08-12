@@ -12,5 +12,5 @@ app_name = "dashboard"
 
 urlpatterns = [
     path("", views.dashboard_results, name="results"),
-    path("candidate/<int:candidate_id>/", views.candidate_detail, name="candidate_detail"),
+    path("candidate/<str:candidate_id>/", views.candidate_detail, name="candidate_detail"),
 ]

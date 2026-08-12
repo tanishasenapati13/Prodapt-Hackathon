@@ -68,8 +68,8 @@ class DashboardResultsViewTests(TestCase):
     def test_page_contains_candidate_name(self):
         """The page HTML should contain at least one candidate name."""
         response = self.client.get(self.url)
-        # Jane Doe is the top scorer in mock data
-        self.assertContains(response, "Jane Doe")
+        # Rahul Sharma is the top scorer in mock data
+        self.assertContains(response, "Rahul Sharma")
 
     def test_page_contains_chart_canvas(self):
         """The page should have the Chart.js canvas elements."""
@@ -86,26 +86,26 @@ class CandidateDetailViewTests(TestCase):
 
     def test_valid_candidate_returns_200(self):
         """A valid candidate ID should return 200."""
-        url = reverse("dashboard:candidate_detail", kwargs={"candidate_id": 1})
+        url = reverse("dashboard:candidate_detail", kwargs={"candidate_id": "res_001"})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_uses_correct_template(self):
         """Should render the candidate_detail.html template."""
-        url = reverse("dashboard:candidate_detail", kwargs={"candidate_id": 1})
+        url = reverse("dashboard:candidate_detail", kwargs={"candidate_id": "res_001"})
         response = self.client.get(url)
         self.assertTemplateUsed(response, "dashboard/candidate_detail.html")
 
     def test_context_has_candidate(self):
         """Context should contain the candidate detail dict."""
-        url = reverse("dashboard:candidate_detail", kwargs={"candidate_id": 1})
+        url = reverse("dashboard:candidate_detail", kwargs={"candidate_id": "res_001"})
         response = self.client.get(url)
         self.assertIn("candidate", response.context)
         self.assertIsNotNone(response.context["candidate"])
 
     def test_context_has_chart_data(self):
         """Context should contain radar/gap chart data."""
-        url = reverse("dashboard:candidate_detail", kwargs={"candidate_id": 1})
+        url = reverse("dashboard:candidate_detail", kwargs={"candidate_id": "res_001"})
         response = self.client.get(url)
         ctx = response.context
         self.assertIn("skill_names", ctx)
@@ -115,25 +115,25 @@ class CandidateDetailViewTests(TestCase):
 
     def test_invalid_candidate_returns_404(self):
         """A non-existent candidate ID should return 404."""
-        url = reverse("dashboard:candidate_detail", kwargs={"candidate_id": 9999})
+        url = reverse("dashboard:candidate_detail", kwargs={"candidate_id": "res_9999"})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
 
     def test_page_contains_candidate_name(self):
         """The detail page should show the candidate's name."""
-        url = reverse("dashboard:candidate_detail", kwargs={"candidate_id": 1})
+        url = reverse("dashboard:candidate_detail", kwargs={"candidate_id": "res_001"})
         response = self.client.get(url)
-        self.assertContains(response, "Jane Doe")
+        self.assertContains(response, "Rahul Sharma")
 
     def test_page_contains_insight_text(self):
         """The detail page should display the AI insight."""
-        url = reverse("dashboard:candidate_detail", kwargs={"candidate_id": 1})
+        url = reverse("dashboard:candidate_detail", kwargs={"candidate_id": "res_001"})
         response = self.client.get(url)
-        self.assertContains(response, "Exceptional backend fit")
+        self.assertContains(response, "Candidate matches 4 of 5")
 
     def test_page_contains_chart_canvases(self):
         """The page should have the Chart.js canvas elements."""
-        url = reverse("dashboard:candidate_detail", kwargs={"candidate_id": 1})
+        url = reverse("dashboard:candidate_detail", kwargs={"candidate_id": "res_001"})
         response = self.client.get(url)
         self.assertContains(response, 'id="radarChart"')
         self.assertContains(response, 'id="gapChart"')

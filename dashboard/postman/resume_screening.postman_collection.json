@@ -1,0 +1,333 @@
+{
+    "info": {
+        "name": "AI Resume Screening — API Tests",
+        "description": "Postman collection for testing the FastAPI backend endpoints used by the dashboard. Covers all three endpoints plus edge cases.\n\nBase URL: {{base_url}} (default: http://localhost:8001)",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:8001",
+            "type": "string"
+        }
+    ],
+    "item": [
+        {
+            "name": "Match Score",
+            "item": [
+                {
+                    "name": "POST /match-score — Valid Request",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"resume_id\": 1,\n    \"jd_id\": 1\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/match-score",
+                            "host": ["{{base_url}}"],
+                            "path": ["match-score"]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Status code is 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test('Response has required fields', function () {",
+                                    "    var json = pm.response.json();",
+                                    "    pm.expect(json).to.have.property('score');",
+                                    "    pm.expect(json).to.have.property('matched_skills');",
+                                    "    pm.expect(json).to.have.property('gaps');",
+                                    "    pm.expect(json).to.have.property('insight_text');",
+                                    "});",
+                                    "",
+                                    "pm.test('Score is between 0 and 100', function () {",
+                                    "    var score = pm.response.json().score;",
+                                    "    pm.expect(score).to.be.within(0, 100);",
+                                    "});",
+                                    "",
+                                    "pm.test('matched_skills is an array', function () {",
+                                    "    pm.expect(pm.response.json().matched_skills).to.be.an('array');",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "POST /match-score — Missing resume_id",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"jd_id\": 1\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/match-score",
+                            "host": ["{{base_url}}"],
+                            "path": ["match-score"]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Returns 422 for missing field', function () {",
+                                    "    pm.response.to.have.status(422);",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Parse Resume",
+            "item": [
+                {
+                    "name": "POST /parse-resume — Valid Request",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"resume_id\": 1\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/parse-resume",
+                            "host": ["{{base_url}}"],
+                            "path": ["parse-resume"]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Status code is 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test('Response is valid JSON', function () {",
+                                    "    pm.response.to.be.json;",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "POST /parse-resume — Invalid resume_id",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"resume_id\": -1\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/parse-resume",
+                            "host": ["{{base_url}}"],
+                            "path": ["parse-resume"]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Returns error for invalid ID', function () {",
+                                    "    pm.expect(pm.response.code).to.be.oneOf([400, 404, 422]);",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Gap Analysis",
+            "item": [
+                {
+                    "name": "POST /gap-analysis — Valid Request",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"resume_id\": 1,\n    \"jd_id\": 1\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/gap-analysis",
+                            "host": ["{{base_url}}"],
+                            "path": ["gap-analysis"]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Status code is 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test('Response is valid JSON', function () {",
+                                    "    pm.response.to.be.json;",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Edge Cases",
+            "item": [
+                {
+                    "name": "POST /match-score — Large Batch Payload",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"resume_id\": 999999,\n    \"jd_id\": 999999\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/match-score",
+                            "host": ["{{base_url}}"],
+                            "path": ["match-score"]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Handles non-existent IDs gracefully', function () {",
+                                    "    pm.expect(pm.response.code).to.be.oneOf([200, 404]);",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "POST /match-score — Empty Body",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/match-score",
+                            "host": ["{{base_url}}"],
+                            "path": ["match-score"]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Returns 422 for empty body', function () {",
+                                    "    pm.response.to.have.status(422);",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "POST /match-score — Malformed JSON",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            { "key": "Content-Type", "value": "application/json" }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{invalid json}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/match-score",
+                            "host": ["{{base_url}}"],
+                            "path": ["match-score"]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Returns 422 for malformed JSON', function () {",
+                                    "    pm.response.to.have.status(422);",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "GET /match-score — Wrong HTTP Method",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{base_url}}/match-score",
+                            "host": ["{{base_url}}"],
+                            "path": ["match-score"]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Returns 405 for wrong method', function () {",
+                                    "    pm.response.to.have.status(405);",
+                                    "});"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

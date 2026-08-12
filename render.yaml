@@ -1,0 +1,47 @@
+# Render.com deployment configuration
+# Two services: Django (dashboard) and FastAPI (backend)
+
+services:
+  # ── Django Dashboard Service ──
+  - type: web
+    name: resume-screening-dashboard
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 3
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: FASTAPI_BASE_URL
+        sync: false  # Set manually after FastAPI service deploys
+      - key: DATABASE_URL
+        fromDatabase:
+          name: resume-screening-db
+          property: connectionString
+      - key: FERNET_KEY
+        sync: false  # Get from Person 3
+
+  # ── FastAPI Backend Service (Person 2 deploys this) ──
+  - type: web
+    name: resume-screening-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements-api.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false  # Person 2 sets this
+      - key: DATABASE_URL
+        fromDatabase:
+          name: resume-screening-db
+          property: connectionString
+
+databases:
+  - name: resume-screening-db
+    plan: free
+    databaseName: resume_screening
+    user: app_user

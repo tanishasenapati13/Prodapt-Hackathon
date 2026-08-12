@@ -29,6 +29,3 @@ desktop.ini
 dist/
 build/
 *.egg-info/
-
-# Ignore API backend for now
-api/

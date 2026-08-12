@@ -296,7 +296,7 @@ def main():
     print(f"Matching complete. Results saved to {OUTPUT_FILE}")
     print("\nCandidate Rankings:")
     for item in scored:
-        print(f"{item['rank']}. {item['candidate_name']} ({item['email']}) → {item['overall_match_percentage']}% ({item['analysis']['hiring_recommendation']})")
+        print(f"{item['rank']}. {item['candidate_name']} ({item['email']}) -> {item['overall_match_percentage']}% ({item['analysis']['hiring_recommendation']})")
 
 if __name__ == "__main__":
     main()

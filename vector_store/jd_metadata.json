@@ -1,0 +1,6 @@
+{
+  "job_description_id": "jd_20260812070736",
+  "job_title": "Senior Software Engineer / Data Scientist",
+  "model": "sentence-transformers/all-MiniLM-L6-v2",
+  "dimension": 384
+}

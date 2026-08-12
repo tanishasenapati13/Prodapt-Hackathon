@@ -1,0 +1,174 @@
+[
+  {
+    "resume_id": "67c6933dd90fc023",
+    "candidate_name": "RAMYA NAKSHATHRA",
+    "email": "rramya1446@gmail.com",
+    "resume_filename": "Ramya Resume.pdf",
+    "job_description_id": "jd_20260812070736",
+    "job_title": "Senior Software Engineer / Data Scientist",
+    "status": "scored",
+    "overall_match_percentage": 47.38,
+    "vector_similarity_score": 0.435,
+    "analysis": {
+      "matched_skills": [
+        "python",
+        "machine learning",
+        "nlp"
+      ],
+      "partial_skills": [
+        {
+          "required_skill": "rest api",
+          "resume_skill": "rest apis",
+          "similarity": 0.937
+        }
+      ],
+      "missing_skills": [
+        "sql",
+        "docker",
+        "data analysis"
+      ],
+      "strengths": [
+        "python",
+        "machine learning",
+        "nlp"
+      ],
+      "gaps": [
+        "sql",
+        "docker",
+        "data analysis"
+      ],
+      "ai_rationale": "Candidate matches 3 of 7 required skills. Hybrid match score is 47.38%.",
+      "hiring_recommendation": "Reject"
+    },
+    "processed_at": "2026-08-12T07:08:23.101154+00:00",
+    "rank": 3
+  },
+  {
+    "resume_id": "887122e018f3d2fa",
+    "candidate_name": "Sarthak Bharadwaj",
+    "email": "sarthakbh321@gmail.com",
+    "resume_filename": "Sarthak.pdf",
+    "job_description_id": "jd_20260812070736",
+    "job_title": "Senior Software Engineer / Data Scientist",
+    "status": "scored",
+    "overall_match_percentage": 37.84,
+    "vector_similarity_score": 0.517,
+    "analysis": {
+      "matched_skills": [
+        "python",
+        "docker"
+      ],
+      "partial_skills": [],
+      "missing_skills": [
+        "sql",
+        "rest api",
+        "machine learning",
+        "nlp",
+        "data analysis"
+      ],
+      "strengths": [
+        "python",
+        "docker"
+      ],
+      "gaps": [
+        "sql",
+        "rest api",
+        "machine learning",
+        "nlp",
+        "data analysis"
+      ],
+      "ai_rationale": "Candidate matches 2 of 7 required skills. Hybrid match score is 37.84%.",
+      "hiring_recommendation": "Reject"
+    },
+    "processed_at": "2026-08-12T07:08:23.182932+00:00",
+    "rank": 4
+  },
+  {
+    "resume_id": "e303a4290b655f6e",
+    "candidate_name": "Shruti S",
+    "email": "shrutiselvakkumar06@gmail.com",
+    "resume_filename": "Shruti Resume.pdf",
+    "job_description_id": "jd_20260812070736",
+    "job_title": "Senior Software Engineer / Data Scientist",
+    "status": "scored",
+    "overall_match_percentage": 55.76,
+    "vector_similarity_score": 0.43,
+    "analysis": {
+      "matched_skills": [
+        "python",
+        "sql",
+        "machine learning",
+        "nlp"
+      ],
+      "partial_skills": [
+        {
+          "required_skill": "rest api",
+          "resume_skill": "rest apis",
+          "similarity": 0.937
+        }
+      ],
+      "missing_skills": [
+        "docker",
+        "data analysis"
+      ],
+      "strengths": [
+        "python",
+        "sql",
+        "machine learning",
+        "nlp"
+      ],
+      "gaps": [
+        "docker",
+        "data analysis"
+      ],
+      "ai_rationale": "Candidate matches 4 of 7 required skills. Hybrid match score is 55.76%.",
+      "hiring_recommendation": "Reject"
+    },
+    "processed_at": "2026-08-12T07:08:23.294777+00:00",
+    "rank": 2
+  },
+  {
+    "resume_id": "8f669cadc98784b7",
+    "candidate_name": "SRIVARSHA S",
+    "email": "ssrivarsha06@gmail.com",
+    "resume_filename": "Srivarsha-RESUME.pdf",
+    "job_description_id": "jd_20260812070736",
+    "job_title": "Senior Software Engineer / Data Scientist",
+    "status": "scored",
+    "overall_match_percentage": 57.88,
+    "vector_similarity_score": 0.483,
+    "analysis": {
+      "matched_skills": [
+        "python",
+        "docker",
+        "machine learning",
+        "nlp"
+      ],
+      "partial_skills": [
+        {
+          "required_skill": "rest api",
+          "resume_skill": "rest apis",
+          "similarity": 0.937
+        }
+      ],
+      "missing_skills": [
+        "sql",
+        "data analysis"
+      ],
+      "strengths": [
+        "python",
+        "docker",
+        "machine learning",
+        "nlp"
+      ],
+      "gaps": [
+        "sql",
+        "data analysis"
+      ],
+      "ai_rationale": "Candidate matches 4 of 7 required skills. Hybrid match score is 57.88%.",
+      "hiring_recommendation": "Reject"
+    },
+    "processed_at": "2026-08-12T07:08:23.405829+00:00",
+    "rank": 1
+  }
+]

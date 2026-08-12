@@ -1,35 +1,40 @@
-"""
-Matching endpoints — serve match-score and gap-analysis results.
-
-POST /match-score     → Score result for a resume/JD pair
-POST /gap-analysis    → Gap analysis for a resume/JD pair (same data)
-"""
-
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from api.data.store import get_result_by_id
+from typing import Optional
+from api.data.store import get_all_results, get_result_by_id
 
 router = APIRouter(tags=["Matching"])
 
-
 class MatchRequest(BaseModel):
-    resume_id: str
-    jd_id: str
-
+    resume_id: Optional[str] = None
+    jd_id: Optional[str] = None
+    resume_text: Optional[str] = None
+    jd_text: Optional[str] = None
 
 @router.post("/match-score")
 async def match_score(request: MatchRequest):
-    """Return the scoring result for a resume/JD pair."""
-    result = get_result_by_id(request.resume_id)
-    if not result:
-        raise HTTPException(status_code=404, detail=f"Resume {request.resume_id} not found")
-    return result
-
+    """Return the scoring result for a resume/JD pair or candidate ID."""
+    if request.resume_id:
+        result = get_result_by_id(request.resume_id)
+        if result:
+            return result
+    
+    results = get_all_results()
+    if results:
+        return results[0]
+        
+    raise HTTPException(status_code=404, detail="No candidate results found")
 
 @router.post("/gap-analysis")
 async def gap_analysis(request: MatchRequest):
-    """Return gap analysis for a resume/JD pair (same data as match-score)."""
-    result = get_result_by_id(request.resume_id)
-    if not result:
-        raise HTTPException(status_code=404, detail=f"Resume {request.resume_id} not found")
-    return result
+    """Return gap analysis for a resume/JD pair or candidate ID."""
+    if request.resume_id:
+        result = get_result_by_id(request.resume_id)
+        if result:
+            return result
+            
+    results = get_all_results()
+    if results:
+        return results[0]
+        
+    raise HTTPException(status_code=404, detail="No candidate results found")

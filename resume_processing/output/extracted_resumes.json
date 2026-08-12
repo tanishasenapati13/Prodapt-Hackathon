@@ -1,0 +1,267 @@
+[
+    {
+        "resume_id": "67c6933dd90fc023",
+        "file": {
+            "filename": "Ramya Resume.pdf",
+            "file_hash": "67c6933dd90fc02354927448d0d8db8bba4e6619f7cef7eb35e06dbc99ddb470",
+            "file_type": "pdf"
+        },
+        "document": {
+            "page_count": 1,
+            "status": "success"
+        },
+        "candidate": {
+            "name": "RAMYA NAKSHATHRA",
+            "emails": [
+                "rramya1446@gmail.com"
+            ]
+        },
+        "skills": [
+            "2024",
+            "Engineered a risk-adaptive fractal authentication framework integrating behavioral biometrics and",
+            "contextual risk scoring",
+            "enabling dynamic trust-based access control and enhanced protection against",
+            "credential compromise and replay attacks.",
+            "Risk-Adaptive Fractal Authentication System",
+            "React",
+            "JavaScript",
+            "ML",
+            "Cybersecurity",
+            "LINK",
+            "+91 9123535795",
+            "rramya1446@gmail.com",
+            "linkedin.com",
+            "github.com",
+            "Portfolio",
+            "Designed a React-based content verification platform integrating AI tampering detection",
+            "cryptographic hashing",
+            "and blockchain-backed proof of ownership",
+            "achieving 98% detection accuracy",
+            "while preventing manipulated or stolen content from being falsely claimed.",
+            "Authx - content theft verification using blockchain",
+            "React",
+            "Hashing",
+            "Smart contracts",
+            "2025",
+            "LINK",
+            "Engineered a real-time AR virtual dressing solution with dynamic garment morphing achieving 95%",
+            "projection fidelity and reducing visual mismatches by 60%",
+            "paired with a device-agnostic responsive UX",
+            "interface enhancing user experience.",
+            "DressFit - 3D Avatar cuztomization software",
+            "React",
+            "Javascript",
+            "CSS",
+            "AR",
+            "2025",
+            "LINK",
+            "Worked as a Summer Research Intern developing an automated feedback-generation system for students’",
+            "answers using NLP and generative-AI techniques. Built LLM-agent pipelines with LangChain to analyze",
+            "500+ responses and produce personalized",
+            "constructive feedback",
+            "reducing evaluation time and boosting",
+            "model accuracy through data preprocessing",
+            "prompt optimization",
+            "and model fine-tuning.",
+            "Summer Research Intern",
+            "VIT Chennai",
+            "May 2025 - July 2025",
+            "Languages: Python",
+            "Java",
+            "C",
+            "C++",
+            "JavaScript",
+            "Dart",
+            "Web: HTML5",
+            "CSS3",
+            "React",
+            "Bootstrap",
+            "Flexbox",
+            "Mobile/App: Flutter",
+            "Firebase",
+            "Android SDK",
+            "SwiftUI",
+            "AI & Data: NumPy",
+            "Pandas",
+            "TensorFlow",
+            "OpenCV",
+            "Machine Learning",
+            "LangChain",
+            "LLaMA-3",
+            "Prompt Engineering",
+            "LLM Agents",
+            "Cloud & DevOps: REST APIs",
+            "Node.js",
+            "Git",
+            "GitHub",
+            "Supabase",
+            "MySQL",
+            "AWS (EC2",
+            "S3",
+            "Lambda",
+            "DynamoDB)",
+            "Security & Research: Blockchain Concepts",
+            "Hashing (SHA-256)",
+            "Tamper Detection"
+        ],
+        "sections": {
+            "other": "",
+            "projects": "RAMYA NAKSHATHRA",
+            "experience": "",
+            "education": "Bachelor of Technology in Computer Science Engineering\nVellore Institute of Technology, Chennai                                                                              Current CGPA : 8.3/10\nJun 2023 - Present\nDeveloped an SEO score prediction system using Python, scikit-learn, and computer vision to analyze\nproduct images and predict optimization scores, integrated with an interactive Streamlit web interface that\nprocessed 100+ product inputs per session, delivering real-time SEO insights and keyword suggestions, and\nimproved prediction accuracy by 86% through model fine-tuning and data preprocessing.\nAI/ML Intern\nZenithIndia\nMay 2025 - Present\nCERTIFICATES & ACHIEVEMENTS\nIBM Certified Generative AI Specialist\nProgramming Fundamentals – IIT Bombay (C, C++, Python)\nPublished a research paper, “A Hybrid AI–Blockchain Approach for Multi-Content Authentication and\nOwnership Proof Generation,” at ICCSP 2026",
+            "skills": "2024\nEngineered a risk-adaptive fractal authentication framework integrating behavioral biometrics and\ncontextual risk scoring, enabling dynamic trust-based access control and enhanced protection against\ncredential compromise and replay attacks.\nRisk-Adaptive Fractal Authentication System | React, JavaScript, ML, Cybersecurity\nLINK\n+91 9123535795 • rramya1446@gmail.com • linkedin.com • github.com • Portfolio\nDesigned a React-based content verification platform integrating AI tampering detection,\ncryptographic hashing, and blockchain-backed proof of ownership, achieving 98% detection accuracy\nwhile preventing manipulated or stolen content from being falsely claimed.\nAuthx - content theft verification using blockchain | React,Hashing,Smart contracts\n2025\nLINK\nEngineered a real-time AR virtual dressing solution with dynamic garment morphing achieving 95%\nprojection fidelity and reducing visual mismatches by 60%, paired with a device-agnostic responsive UX\ninterface enhancing user experience.\nDressFit - 3D Avatar cuztomization software | React,Javascript,CSS,AR\n2025\nLINK\nWorked as a Summer Research Intern developing an automated feedback-generation system for students’\nanswers using NLP and generative-AI techniques. Built LLM-agent pipelines with LangChain to analyze\n500+ responses and produce personalized, constructive feedback, reducing evaluation time and boosting\nmodel accuracy through data preprocessing, prompt optimization, and model fine-tuning.\nSummer Research Intern\nVIT Chennai\nMay 2025 - July 2025\nLanguages: Python, Java, C, C++, JavaScript, Dart\nWeb: HTML5, CSS3, React, Bootstrap, Flexbox\nMobile/App: Flutter, Firebase, Android SDK, SwiftUI\nAI & Data: NumPy, Pandas, TensorFlow, OpenCV, Machine Learning, LangChain, LLaMA-3,\nPrompt Engineering, LLM Agents\nCloud & DevOps: REST APIs, Node.js, Git, GitHub, Supabase, MySQL, AWS (EC2, S3, Lambda,\nDynamoDB)\nSecurity & Research: Blockchain Concepts, Hashing (SHA-256), Tamper Detection"
+        },
+        "pages": [
+            {
+                "page_number": 1,
+                "text": "PROJECTS\nRAMYA NAKSHATHRA\nWORK EXPERIENCE\nEDUCATION\nBachelor of Technology in Computer Science Engineering \nVellore Institute of Technology, Chennai                                                                              Current CGPA : 8.3/10\nJun 2023 - Present\nDeveloped an SEO score prediction system using Python, scikit-learn, and computer vision to analyze\nproduct images and predict optimization scores, integrated with an interactive Streamlit web interface that\nprocessed 100+ product inputs per session, delivering real-time SEO insights and keyword suggestions, and\nimproved prediction accuracy by 86% through model fine-tuning and data preprocessing.\n AI/ML Intern \n ZenithIndia\nMay 2025 - Present\nCERTIFICATES & ACHIEVEMENTS\nIBM Certified Generative AI Specialist\nProgramming Fundamentals – IIT Bombay (C, C++, Python)\nPublished a research paper, “A Hybrid AI–Blockchain Approach for Multi-Content Authentication and\nOwnership Proof Generation,” at ICCSP 2026\nSKILLS\n2024\nEngineered a risk-adaptive fractal authentication framework integrating behavioral biometrics and\ncontextual risk scoring, enabling dynamic trust-based access control and enhanced protection against\ncredential compromise and replay attacks.\nRisk-Adaptive Fractal Authentication System | React, JavaScript, ML, Cybersecurity \nLINK\n+91 9123535795 • rramya1446@gmail.com • linkedin.com • github.com • Portfolio\nDesigned a React-based content verification platform integrating AI tampering detection,\ncryptographic hashing, and blockchain-backed proof of ownership, achieving 98% detection accuracy\nwhile preventing manipulated or stolen content from being falsely claimed.\nAuthx - content theft verification using blockchain | React,Hashing,Smart contracts\n2025\nLINK\nEngineered a real-time AR virtual dressing solution with dynamic garment morphing achieving 95%\nprojection fidelity and reducing visual mismatches by 60%, paired with a device-agnostic responsive UX\ninterface enhancing user experience.\nDressFit - 3D Avatar cuztomization software | React,Javascript,CSS,AR\n2025\nLINK\nWorked as a Summer Research Intern developing an automated feedback-generation system for students’\nanswers using NLP and generative-AI techniques. Built LLM-agent pipelines with LangChain to analyze\n500+ responses and produce personalized, constructive feedback, reducing evaluation time and boosting\nmodel accuracy through data preprocessing, prompt optimization, and model fine-tuning.\n Summer Research Intern\n VIT Chennai\nMay 2025 - July 2025\nLanguages: Python, Java, C, C++, JavaScript, Dart\nWeb: HTML5, CSS3, React, Bootstrap, Flexbox\nMobile/App: Flutter, Firebase, Android SDK, SwiftUI\nAI & Data: NumPy, Pandas, TensorFlow, OpenCV, Machine Learning, LangChain, LLaMA-3,\nPrompt Engineering, LLM Agents\nCloud & DevOps: REST APIs, Node.js, Git, GitHub, Supabase, MySQL, AWS (EC2, S3, Lambda,\nDynamoDB)\nSecurity & Research: Blockchain Concepts, Hashing (SHA-256), Tamper Detection"
+            }
+        ],
+        "full_text": "PROJECTS\nRAMYA NAKSHATHRA\nWORK EXPERIENCE\nEDUCATION\nBachelor of Technology in Computer Science Engineering \nVellore Institute of Technology, Chennai                                                                              Current CGPA : 8.3/10\nJun 2023 - Present\nDeveloped an SEO score prediction system using Python, scikit-learn, and computer vision to analyze\nproduct images and predict optimization scores, integrated with an interactive Streamlit web interface that\nprocessed 100+ product inputs per session, delivering real-time SEO insights and keyword suggestions, and\nimproved prediction accuracy by 86% through model fine-tuning and data preprocessing.\n AI/ML Intern \n ZenithIndia\nMay 2025 - Present\nCERTIFICATES & ACHIEVEMENTS\nIBM Certified Generative AI Specialist\nProgramming Fundamentals – IIT Bombay (C, C++, Python)\nPublished a research paper, “A Hybrid AI–Blockchain Approach for Multi-Content Authentication and\nOwnership Proof Generation,” at ICCSP 2026\nSKILLS\n2024\nEngineered a risk-adaptive fractal authentication framework integrating behavioral biometrics and\ncontextual risk scoring, enabling dynamic trust-based access control and enhanced protection against\ncredential compromise and replay attacks.\nRisk-Adaptive Fractal Authentication System | React, JavaScript, ML, Cybersecurity \nLINK\n+91 9123535795 • rramya1446@gmail.com • linkedin.com • github.com • Portfolio\nDesigned a React-based content verification platform integrating AI tampering detection,\ncryptographic hashing, and blockchain-backed proof of ownership, achieving 98% detection accuracy\nwhile preventing manipulated or stolen content from being falsely claimed.\nAuthx - content theft verification using blockchain | React,Hashing,Smart contracts\n2025\nLINK\nEngineered a real-time AR virtual dressing solution with dynamic garment morphing achieving 95%\nprojection fidelity and reducing visual mismatches by 60%, paired with a device-agnostic responsive UX\ninterface enhancing user experience.\nDressFit - 3D Avatar cuztomization software | React,Javascript,CSS,AR\n2025\nLINK\nWorked as a Summer Research Intern developing an automated feedback-generation system for students’\nanswers using NLP and generative-AI techniques. Built LLM-agent pipelines with LangChain to analyze\n500+ responses and produce personalized, constructive feedback, reducing evaluation time and boosting\nmodel accuracy through data preprocessing, prompt optimization, and model fine-tuning.\n Summer Research Intern\n VIT Chennai\nMay 2025 - July 2025\nLanguages: Python, Java, C, C++, JavaScript, Dart\nWeb: HTML5, CSS3, React, Bootstrap, Flexbox\nMobile/App: Flutter, Firebase, Android SDK, SwiftUI\nAI & Data: NumPy, Pandas, TensorFlow, OpenCV, Machine Learning, LangChain, LLaMA-3,\nPrompt Engineering, LLM Agents\nCloud & DevOps: REST APIs, Node.js, Git, GitHub, Supabase, MySQL, AWS (EC2, S3, Lambda,\nDynamoDB)\nSecurity & Research: Blockchain Concepts, Hashing (SHA-256), Tamper Detection",
+        "error": null
+    },
+    {
+        "resume_id": "e303a4290b655f6e",
+        "file": {
+            "filename": "Shruti Resume.pdf",
+            "file_hash": "e303a4290b655f6e3b112f9d10407bec9f5f43b3ea6e111d7869092659c5bfdb",
+            "file_type": "pdf"
+        },
+        "document": {
+            "page_count": 2,
+            "status": "success"
+        },
+        "candidate": {
+            "name": "Shruti S",
+            "emails": [
+                "shrutiselvakkumar06@gmail.com"
+            ]
+        },
+        "skills": [
+            "●​",
+            "Programming: Python · JavaScript · Java · C · C++",
+            "●​",
+            "Frameworks & Technologies: FastAPI · Flask · React.js · Playwright · REST APIs · HTML5 · CSS3",
+            "●​",
+            "AI & Machine Learning: LLM Fine-tuning · Prompt Engineering · NLP · Computer Vision · Applied AI ·",
+            "Dataset Curation",
+            "●​",
+            "Databases: Neo4j · Supabase · SQLite · SQL",
+            "●​",
+            "Developer Tools: Git · GitHub · Postman · Figma",
+            "●​",
+            "Core Concepts: Data Structures & Algorithms · Object-Oriented Programming · DBMS · Operating Systems ·",
+            "Computer Networks · System Design · Asynchronous Programming",
+            "ACHIEVEMENTS & CERTIFICATES",
+            "●​",
+            "Research paper accepted at ICCSP 2026 (12th International Conference on Communication & Signal",
+            "Processing) — on a Hybrid AI–Blockchain framework for content authentication."
+        ],
+        "sections": {
+            "other": "Shruti S\nComputer Science Undergraduate • Software Engineering • AI Systems\nshrutiselvakkumar06@gmail.com • +91 7305460631 • Linkedin • Github • Portfolio",
+            "education": "VELLORE INSTITUTE OF TECHNOLOGY, CHENNAI​\nJun 2023-Present\nBachelor of Technology in Computer Science Engineering ​\nCGPA 8.21",
+            "experience": "VELLORE INSTITUTE OF TECHNOLOGY​\nChennai, Tamilnadu\nIntern - Research          ​\nJUN 2025-SEPT 2025\n●​\nFine-tuned and evaluated a Large Language Model (LLM) to generate personalized, structured academic\nfeedback, improving consistency and reducing manual evaluation effort.\n●​\nEngineered the end-to-end ML pipeline, including dataset curation, preprocessing, prompt optimization,\nevaluation, and iterative model refinement against faculty-defined quality metrics.\n●​\nDeveloped automated workflows for large-scale academic feedback generation, enabling scalable evaluation\nwhile maintaining output quality.\n●​\nCollaborated with faculty researchers to translate research objectives into deployable AI solutions through\niterative experimentation and performance validation.\n●​\nStack: Python · NLP · LLM Fine-tuning · Prompt Engineering · Dataset Curation · Applied AI\nSHAKTA TECHNOLOGIES PVT LTD​\nChennai, Tamilnadu\nIntern - Structured Analysis & Risk Documentation            ​\nMAY 2025-JUN 2025\n●​\nAnalyzed internal web applications and REST APIs to identify security, workflow, and process-level risks,\nproducing structured technical reports with actionable recommendations.\n●​\nCollaborated\nwith\nengineering\nand\nbusiness\nstakeholders\nto\ntranslate\ntechnical findings into\nimplementation-ready documentation for decision-making.\n●​\nDesigned standardized assessment frameworks to evaluate application workflows, improving consistency in\nrisk analysis across multiple systems.\n●​\nDocumented functional requirements, system behavior, and engineering observations to support development\nand compliance initiatives.\n●​\nStack: API Analysis · Technical Documentation · Risk Assessment · Requirement Analysis · Stakeholder\nCommunication",
+            "projects": "AGENTX – AUTONOMOUS BROWSER AI AGENT​\nLink\n●​\nBuilt an autonomous browser agent that converts natural language goals into executable task plans, enabling\nend-to-end web automation with planning, execution, verification, and self-correction.\n●​\nEngineered a modular agent architecture comprising an LLM-based planner, asynchronous execution engine,\nPlaywright browser controller, verification pipeline, and SQLite-backed memory for reusable execution\nknowledge.\n●​\nImplemented adaptive failure recovery using retry, selector repair, and dynamic replanning strategies, allowing\nthe agent to recover from DOM changes, navigation failures, and execution errors autonomously.\n●​\nDesigned a benchmark suite spanning 25 browser automation tasks across navigation, extraction, form\ninteraction, multi-step reasoning, and error recovery, achieving 88% overall task completion while averaging\n15.9 s/task and 2.2 execution steps/task.\n●​\nStack: Python · FastAPI · Playwright · SQLite · LLMs · AsyncIO · REST APIs\nAUTHX – MULTI-LAYER CONTENT AUTHENTICATION & THEFT DETECTION SYSTEM ​\nLink\n●​\nDeveloped a content authentication framework to detect image manipulation, AI-generated alterations, and\npartial-copy theft using perceptual hashing, frequency-domain analysis, and metadata verification.\n●​\nAchieved 97% detection accuracy on a curated evaluation dataset by combining pHash similarity scoring,\nDCT/FFT-based signal analysis, and adaptive thresholding while maintaining zero observed false positives.\n●​\nDesigned a multi-stage verification pipeline integrating SHA-256 integrity checks, perceptual similarity\nmatching, and forensic pattern analysis.\n●​\nResearch accepted for presentation at the ICCSP 2026 peer-reviewed international conference.\n●​\nStack: Python · SHA-256 · pHash · DCT/FFT Signal Processing · Pattern Analysis\nPLOTLINES - EXPLAINABLE MOVIE RECOMMENDATION PLATFORM ​\nLink\n●​\nDeveloped a full-stack movie recommendation platform leveraging Neo4j graph databases to model\nrelationships between users, genres, actors, directors, and movies for personalized recommendations.\n●​\nEngineered an explainable recommendation engine using graph traversal algorithms and NLP-based\npreference extraction, generating recommendations aligned with user likes, dislikes, and viewing history.\n●​\nDesigned RESTful APIs and optimized graph queries to efficiently retrieve connected movie recommendations\nwhile providing transparent reasoning for every suggestion.\n●​\nBuilt an interactive React-based interface enabling preference management, recommendation visualization,\nand real-time exploration of graph-based recommendations.\n●​\nStack: TypeScript · React · Node.js · Neo4j · NLP · REST APIs\nPUBLICATIONS\nICCSP’26    ​​\nLink\nA Hybrid AI-Blockchain Approach for Multi-Content Authentication and Ownership Proof Generation - Accepted, ICCSP 2026\n(12th International Conference on Communication and Signal Processing 2026)\nLEADERSHIP\nIEEE COMPUTER SOCIETY​\nChennai, Tamilnadu\nDepartment Head           ​\nAUG 2024-Present\n●​\nLed a cross-functional student team of 50+ to plan and execute technical workshops, speaker sessions, and\nhackathons - improving department participation by 40%.\n●​\nDrove end-to-end strategic planning: from sourcing industry speakers and faculty advisors to managing\nlogistics, timelines, and student engagement.\n●​\nMentored junior members and built delegation systems that improved leadership continuity and team\nownership.\n●​\nSkills: Team Leadership · Event Management · Stakeholder Coordination · Mentorship",
+            "skills": "●​\nProgramming: Python · JavaScript · Java · C · C++\n●​\nFrameworks & Technologies: FastAPI · Flask · React.js · Playwright · REST APIs · HTML5 · CSS3\n●​\nAI & Machine Learning: LLM Fine-tuning · Prompt Engineering · NLP · Computer Vision · Applied AI ·\nDataset Curation\n●​\nDatabases: Neo4j · Supabase · SQLite · SQL\n●​\nDeveloper Tools: Git · GitHub · Postman · Figma\n●​\nCore Concepts: Data Structures & Algorithms · Object-Oriented Programming · DBMS · Operating Systems ·\nComputer Networks · System Design · Asynchronous Programming\nACHIEVEMENTS & CERTIFICATES\n●​\nResearch paper accepted at ICCSP 2026 (12th International Conference on Communication & Signal\nProcessing) — on a Hybrid AI–Blockchain framework for content authentication."
+        },
+        "pages": [
+            {
+                "page_number": 1,
+                "text": "Shruti S \nComputer Science Undergraduate • Software Engineering • AI Systems \nshrutiselvakkumar06@gmail.com • +91 7305460631 • Linkedin • Github • Portfolio \n \nEDUCATION \n \nVELLORE INSTITUTE OF TECHNOLOGY, CHENNAI​\nJun 2023-Present \n Bachelor of Technology in Computer Science Engineering ​\nCGPA 8.21 \n \nEXPERIENCE \n \nVELLORE INSTITUTE OF TECHNOLOGY​\nChennai, Tamilnadu \nIntern - Research          ​\nJUN 2025-SEPT 2025 \n●​\nFine-tuned and evaluated a Large Language Model (LLM) to generate personalized, structured academic \nfeedback, improving consistency and reducing manual evaluation effort.  \n●​\nEngineered the end-to-end ML pipeline, including dataset curation, preprocessing, prompt optimization, \nevaluation, and iterative model refinement against faculty-defined quality metrics.  \n●​\nDeveloped automated workflows for large-scale academic feedback generation, enabling scalable evaluation \nwhile maintaining output quality.  \n●​\nCollaborated with faculty researchers to translate research objectives into deployable AI solutions through \niterative experimentation and performance validation.  \n●​\nStack: Python · NLP · LLM Fine-tuning · Prompt Engineering · Dataset Curation · Applied AI  \nSHAKTA TECHNOLOGIES PVT LTD​\nChennai, Tamilnadu \nIntern - Structured Analysis & Risk Documentation            ​\nMAY 2025-JUN 2025 \n●​\nAnalyzed internal web applications and REST APIs to identify security, workflow, and process-level risks, \nproducing structured technical reports with actionable recommendations. \n●​\nCollaborated \nwith \nengineering \nand \nbusiness \nstakeholders \nto \ntranslate \ntechnical findings into \nimplementation-ready documentation for decision-making.  \n●​\nDesigned standardized assessment frameworks to evaluate application workflows, improving consistency in \nrisk analysis across multiple systems.  \n●​\nDocumented functional requirements, system behavior, and engineering observations to support development \nand compliance initiatives.  \n●​\nStack: API Analysis · Technical Documentation · Risk Assessment · Requirement Analysis · Stakeholder \nCommunication  \nPROJECTS \n \n AGENTX – AUTONOMOUS BROWSER AI AGENT​\nLink \n●​\nBuilt an autonomous browser agent that converts natural language goals into executable task plans, enabling \nend-to-end web automation with planning, execution, verification, and self-correction.  \n●​\nEngineered a modular agent architecture comprising an LLM-based planner, asynchronous execution engine, \nPlaywright browser controller, verification pipeline, and SQLite-backed memory for reusable execution \nknowledge.  \n●​\nImplemented adaptive failure recovery using retry, selector repair, and dynamic replanning strategies, allowing \nthe agent to recover from DOM changes, navigation failures, and execution errors autonomously.  \n●​\nDesigned a benchmark suite spanning 25 browser automation tasks across navigation, extraction, form \ninteraction, multi-step reasoning, and error recovery, achieving 88% overall task completion while averaging \n15.9 s/task and 2.2 execution steps/task. \n●​\nStack: Python · FastAPI · Playwright · SQLite · LLMs · AsyncIO · REST APIs  \n  \nAUTHX – MULTI-LAYER CONTENT AUTHENTICATION & THEFT DETECTION SYSTEM ​\nLink"
+            },
+            {
+                "page_number": 2,
+                "text": "●​\nDeveloped a content authentication framework to detect image manipulation, AI-generated alterations, and \npartial-copy theft using perceptual hashing, frequency-domain analysis, and metadata verification. \n●​\nAchieved 97% detection accuracy on a curated evaluation dataset by combining pHash similarity scoring, \nDCT/FFT-based signal analysis, and adaptive thresholding while maintaining zero observed false positives. \n●​\nDesigned a multi-stage verification pipeline integrating SHA-256 integrity checks, perceptual similarity \nmatching, and forensic pattern analysis. \n●​\nResearch accepted for presentation at the ICCSP 2026 peer-reviewed international conference. \n●​\nStack: Python · SHA-256 · pHash · DCT/FFT Signal Processing · Pattern Analysis \nPLOTLINES - EXPLAINABLE MOVIE RECOMMENDATION PLATFORM ​\nLink \n●​\nDeveloped a full-stack movie recommendation platform leveraging Neo4j graph databases to model \nrelationships between users, genres, actors, directors, and movies for personalized recommendations. \n●​\nEngineered an explainable recommendation engine using graph traversal algorithms and NLP-based \npreference extraction, generating recommendations aligned with user likes, dislikes, and viewing history. \n●​\nDesigned RESTful APIs and optimized graph queries to efficiently retrieve connected movie recommendations \nwhile providing transparent reasoning for every suggestion. \n●​\nBuilt an interactive React-based interface enabling preference management, recommendation visualization, \nand real-time exploration of graph-based recommendations.  \n●​\nStack: TypeScript · React · Node.js · Neo4j · NLP · REST APIs  \n \nPUBLICATIONS \n \nICCSP’26    ​​\nLink \nA Hybrid AI-Blockchain Approach for Multi-Content Authentication and Ownership Proof Generation - Accepted, ICCSP 2026 \n(12th International Conference on Communication and Signal Processing 2026) \n \nLEADERSHIP \n \nIEEE COMPUTER SOCIETY​\nChennai, Tamilnadu \nDepartment Head           ​\nAUG 2024-Present \n●​\nLed a cross-functional student team of 50+ to plan and execute technical workshops, speaker sessions, and \nhackathons - improving department participation by 40%. \n●​\nDrove end-to-end strategic planning: from sourcing industry speakers and faculty advisors to managing \nlogistics, timelines, and student engagement. \n●​\nMentored junior members and built delegation systems that improved leadership continuity and team \nownership. \n●​\nSkills: Team Leadership · Event Management · Stakeholder Coordination · Mentorship \nSKILLS \n●​\nProgramming: Python · JavaScript · Java · C · C++ \n●​\nFrameworks & Technologies: FastAPI · Flask · React.js · Playwright · REST APIs · HTML5 · CSS3  \n●​\nAI & Machine Learning: LLM Fine-tuning · Prompt Engineering · NLP · Computer Vision · Applied AI · \nDataset Curation  \n●​\nDatabases: Neo4j · Supabase · SQLite · SQL  \n●​\nDeveloper Tools: Git · GitHub · Postman · Figma  \n●​\nCore Concepts: Data Structures & Algorithms · Object-Oriented Programming · DBMS · Operating Systems · \nComputer Networks · System Design · Asynchronous Programming  \n \nACHIEVEMENTS & CERTIFICATES \n●​\nResearch paper accepted at ICCSP 2026 (12th International Conference on Communication & Signal \nProcessing) — on a Hybrid AI–Blockchain framework for content authentication."
+            }
+        ],
+        "full_text": "Shruti S \nComputer Science Undergraduate • Software Engineering • AI Systems \nshrutiselvakkumar06@gmail.com • +91 7305460631 • Linkedin • Github • Portfolio \n \nEDUCATION \n \nVELLORE INSTITUTE OF TECHNOLOGY, CHENNAI​\nJun 2023-Present \n Bachelor of Technology in Computer Science Engineering ​\nCGPA 8.21 \n \nEXPERIENCE \n \nVELLORE INSTITUTE OF TECHNOLOGY​\nChennai, Tamilnadu \nIntern - Research          ​\nJUN 2025-SEPT 2025 \n●​\nFine-tuned and evaluated a Large Language Model (LLM) to generate personalized, structured academic \nfeedback, improving consistency and reducing manual evaluation effort.  \n●​\nEngineered the end-to-end ML pipeline, including dataset curation, preprocessing, prompt optimization, \nevaluation, and iterative model refinement against faculty-defined quality metrics.  \n●​\nDeveloped automated workflows for large-scale academic feedback generation, enabling scalable evaluation \nwhile maintaining output quality.  \n●​\nCollaborated with faculty researchers to translate research objectives into deployable AI solutions through \niterative experimentation and performance validation.  \n●​\nStack: Python · NLP · LLM Fine-tuning · Prompt Engineering · Dataset Curation · Applied AI  \nSHAKTA TECHNOLOGIES PVT LTD​\nChennai, Tamilnadu \nIntern - Structured Analysis & Risk Documentation            ​\nMAY 2025-JUN 2025 \n●​\nAnalyzed internal web applications and REST APIs to identify security, workflow, and process-level risks, \nproducing structured technical reports with actionable recommendations. \n●​\nCollaborated \nwith \nengineering \nand \nbusiness \nstakeholders \nto \ntranslate \ntechnical findings into \nimplementation-ready documentation for decision-making.  \n●​\nDesigned standardized assessment frameworks to evaluate application workflows, improving consistency in \nrisk analysis across multiple systems.  \n●​\nDocumented functional requirements, system behavior, and engineering observations to support development \nand compliance initiatives.  \n●​\nStack: API Analysis · Technical Documentation · Risk Assessment · Requirement Analysis · Stakeholder \nCommunication  \nPROJECTS \n \n AGENTX – AUTONOMOUS BROWSER AI AGENT​\nLink \n●​\nBuilt an autonomous browser agent that converts natural language goals into executable task plans, enabling \nend-to-end web automation with planning, execution, verification, and self-correction.  \n●​\nEngineered a modular agent architecture comprising an LLM-based planner, asynchronous execution engine, \nPlaywright browser controller, verification pipeline, and SQLite-backed memory for reusable execution \nknowledge.  \n●​\nImplemented adaptive failure recovery using retry, selector repair, and dynamic replanning strategies, allowing \nthe agent to recover from DOM changes, navigation failures, and execution errors autonomously.  \n●​\nDesigned a benchmark suite spanning 25 browser automation tasks across navigation, extraction, form \ninteraction, multi-step reasoning, and error recovery, achieving 88% overall task completion while averaging \n15.9 s/task and 2.2 execution steps/task. \n●​\nStack: Python · FastAPI · Playwright · SQLite · LLMs · AsyncIO · REST APIs  \n  \nAUTHX – MULTI-LAYER CONTENT AUTHENTICATION & THEFT DETECTION SYSTEM ​\nLink\n\n●​\nDeveloped a content authentication framework to detect image manipulation, AI-generated alterations, and \npartial-copy theft using perceptual hashing, frequency-domain analysis, and metadata verification. \n●​\nAchieved 97% detection accuracy on a curated evaluation dataset by combining pHash similarity scoring, \nDCT/FFT-based signal analysis, and adaptive thresholding while maintaining zero observed false positives. \n●​\nDesigned a multi-stage verification pipeline integrating SHA-256 integrity checks, perceptual similarity \nmatching, and forensic pattern analysis. \n●​\nResearch accepted for presentation at the ICCSP 2026 peer-reviewed international conference. \n●​\nStack: Python · SHA-256 · pHash · DCT/FFT Signal Processing · Pattern Analysis \nPLOTLINES - EXPLAINABLE MOVIE RECOMMENDATION PLATFORM ​\nLink \n●​\nDeveloped a full-stack movie recommendation platform leveraging Neo4j graph databases to model \nrelationships between users, genres, actors, directors, and movies for personalized recommendations. \n●​\nEngineered an explainable recommendation engine using graph traversal algorithms and NLP-based \npreference extraction, generating recommendations aligned with user likes, dislikes, and viewing history. \n●​\nDesigned RESTful APIs and optimized graph queries to efficiently retrieve connected movie recommendations \nwhile providing transparent reasoning for every suggestion. \n●​\nBuilt an interactive React-based interface enabling preference management, recommendation visualization, \nand real-time exploration of graph-based recommendations.  \n●​\nStack: TypeScript · React · Node.js · Neo4j · NLP · REST APIs  \n \nPUBLICATIONS \n \nICCSP’26    ​​\nLink \nA Hybrid AI-Blockchain Approach for Multi-Content Authentication and Ownership Proof Generation - Accepted, ICCSP 2026 \n(12th International Conference on Communication and Signal Processing 2026) \n \nLEADERSHIP \n \nIEEE COMPUTER SOCIETY​\nChennai, Tamilnadu \nDepartment Head           ​\nAUG 2024-Present \n●​\nLed a cross-functional student team of 50+ to plan and execute technical workshops, speaker sessions, and \nhackathons - improving department participation by 40%. \n●​\nDrove end-to-end strategic planning: from sourcing industry speakers and faculty advisors to managing \nlogistics, timelines, and student engagement. \n●​\nMentored junior members and built delegation systems that improved leadership continuity and team \nownership. \n●​\nSkills: Team Leadership · Event Management · Stakeholder Coordination · Mentorship \nSKILLS \n●​\nProgramming: Python · JavaScript · Java · C · C++ \n●​\nFrameworks & Technologies: FastAPI · Flask · React.js · Playwright · REST APIs · HTML5 · CSS3  \n●​\nAI & Machine Learning: LLM Fine-tuning · Prompt Engineering · NLP · Computer Vision · Applied AI · \nDataset Curation  \n●​\nDatabases: Neo4j · Supabase · SQLite · SQL  \n●​\nDeveloper Tools: Git · GitHub · Postman · Figma  \n●​\nCore Concepts: Data Structures & Algorithms · Object-Oriented Programming · DBMS · Operating Systems · \nComputer Networks · System Design · Asynchronous Programming  \n \nACHIEVEMENTS & CERTIFICATES \n●​\nResearch paper accepted at ICCSP 2026 (12th International Conference on Communication & Signal \nProcessing) — on a Hybrid AI–Blockchain framework for content authentication.",
+        "error": null
+    },
+    {
+        "resume_id": "8f669cadc98784b7",
+        "file": {
+            "filename": "Srivarsha-RESUME.pdf",
+            "file_hash": "8f669cadc98784b74e03f01b1295cb0f4c30ea9d34f4a062404c7ab3623f3867",
+            "file_type": "pdf"
+        },
+        "document": {
+            "page_count": 2,
+            "status": "success"
+        },
+        "candidate": {
+            "name": "SRIVARSHA S",
+            "emails": [
+                "ssrivarsha06@gmail.com"
+            ]
+        },
+        "skills": [
+            "Programming & Languages : Python",
+            "C/C++",
+            "Java",
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "Dart",
+            "Frameworks & Libraries",
+            ": Flask",
+            "React.js",
+            "Node.js",
+            "Flutter",
+            "Three.js",
+            "Cloud & Databases",
+            ": AWS",
+            "Firebase",
+            "MongoDB",
+            "MySQL",
+            "DevOps & Tools",
+            ": Git",
+            "Docker",
+            "Postman",
+            "Linux",
+            "Jupyter Notebook",
+            "VS Code",
+            "MS",
+            "APIs & Security",
+            ": REST APIs",
+            "JWT Authentication",
+            "OAuth 2.0",
+            "Cryptography",
+            "Design & Frontend Technologies: UI/UX Design",
+            "WebGL",
+            "GLTFLoader",
+            "Blender",
+            "AI/ML & Data Technologies : Transformers",
+            "NLP",
+            "Computer Vision",
+            "AI/ML Integration",
+            "TensorFlow",
+            "PyTorch",
+            "HuggingFace",
+            "Linguistic Languages",
+            ": English",
+            "Tamil- Proficient",
+            "Hindi- Intermediate",
+            "German- Basics"
+        ],
+        "sections": {
+            "other": "SRIVARSHA S\nChennai, India| Phone: +91 6383374683| Email:ssrivarsha06@gmail.com|  Linkedin | Github",
+            "education": "Vellore Institute of Technology, Chennai | BTech-CSE. |CGPA:8.6|\n2023- Current\nPushpalata Vidya Mandir, Tirunelveli | 10th Grade: 98% | 12th Grade: 94% |\n2012- 23",
+            "skills": "• Programming & Languages : Python, C/C++, Java, HTML, CSS, JavaScript, Dart\n• Frameworks & Libraries\n: Flask, React.js, Node.js, Flutter, Three.js\n• Cloud & Databases\n: AWS, Firebase, MongoDB, MySQL\n• DevOps & Tools\n: Git, Docker, Postman, Linux, Jupyter Notebook, VS Code, MS\n• APIs & Security\n: REST APIs, JWT Authentication, OAuth 2.0, Cryptography\n• Design & Frontend Technologies: UI/UX Design, WebGL, GLTFLoader, Blender\n• AI/ML & Data Technologies : Transformers, NLP, Computer Vision, AI/ML Integration,\nTensorFlow, PyTorch, HuggingFace\n• Linguistic Languages\n: English, Tamil- Proficient, Hindi- Intermediate, German- Basics",
+            "experience": "Summer Research Internship -VIT University, Chennai, Tamil Nadu                  May 2025 – July 2025\n▪ Researched Automated Feedback Generation using fine-tuned BERT & RoBERTa\ntransformer models.\n▪ Implemented text preprocessing, semantic analysis, and context-aware evaluation\ntechniques in Python (NLP, Transformers).\n▪ Achieved approx.15% improvement in feedback relevance on test datasets.\nProject Intern – MIRAI (AI-Powered Smart Fashion Mirror)- Chennai\nDec 2025 –Feb 2025\n▪ Built backend recommendation engine powering real-time AI smart mirror.\n▪ Implemented vector-based similarity search and optimized retrieval for personalized outfit\nrecommendations.\n▪ Integrated metadata-driven rules with machine learning models to improve\nrecommendation relevance.\n▪ Supported backend APIs by delivering production-ready recommendation artifacts.\nRESEARCH & PROJECTS\n•\nDressFit – AI-Driven Virtual Try-On Platform\n2024                   LINK\nReact, Flask, Three.js, Blender, WebGL, AI| Personalized 3D avatar scaling and dress\nvisualization using GLB models, deployed on Vercel| Improved avatar-fit accuracy by\napprox.50% using user-measurement-based scaling.\n•\nAI-Podcast generator\n2025                 LINK\nPython, GPT-4o, NLP, REST APIs, Streamlit, ElevenLabs API| Dual-Voice Script Generation|\nAutomated 90% of podcast script creation.\n•\nAWS Pet Adoption Platform\n2025\nLINK\nEC2, RDS, S3, MySQL | Full-stack deployment of dynamic adoption workflows with cloud\nhosting| Reduced page load time by approx.40% through optimized AWS configuration.\n•\nBlockchain Identity Verification\n2025\nLINK\nReact, Node.js, Solidity, Hardhat, Ethers.js | Implemented secure on-chain identity registry\nusing Merkle Trees and smart contracts.",
+            "achievements": "•\nIEEE MPCON 2026 – Paper accepted for oral presentation on Blockchain-based Secure Aid\nDistribution using Zero-Knowledge Proofs.\n•\nSecured 17th place out of 120 teams in Hack-n-Droid 2025 organized by the Android Club, VIT\nChennai.\n•\nSchool Topper in CBSE Class 10 Board Examination.",
+            "certifications": "•\nGEN-AI Using IBM WatsonX\n-IBM Developer Skills Network\n11th June 2025\n•\nns-3 Network Simulator Training - IIT Bombay & Spoken Tutorial Project                   March 2025"
+        },
+        "pages": [
+            {
+                "page_number": 1,
+                "text": "SRIVARSHA S  \nChennai, India| Phone: +91 6383374683| Email:ssrivarsha06@gmail.com|  Linkedin | Github  \n \nEDUCATION \nVellore Institute of Technology, Chennai | BTech-CSE. |CGPA:8.6|      \n           \n2023- Current \nPushpalata Vidya Mandir, Tirunelveli | 10th Grade: 98% | 12th Grade: 94% |             \n2012- 23  \n \nSKILLS  \n• Programming & Languages : Python, C/C++, Java, HTML, CSS, JavaScript, Dart \n• Frameworks & Libraries    \n: Flask, React.js, Node.js, Flutter, Three.js \n• Cloud & Databases  \n: AWS, Firebase, MongoDB, MySQL \n• DevOps & Tools \n \n: Git, Docker, Postman, Linux, Jupyter Notebook, VS Code, MS   \n• APIs & Security \n \n: REST APIs, JWT Authentication, OAuth 2.0, Cryptography \n• Design & Frontend Technologies: UI/UX Design, WebGL, GLTFLoader, Blender \n• AI/ML & Data Technologies : Transformers, NLP, Computer Vision, AI/ML Integration,  \n  TensorFlow, PyTorch, HuggingFace \n• Linguistic Languages \n: English, Tamil- Proficient, Hindi- Intermediate, German- Basics \n \nEXPERIENCE  \nSummer Research Internship -VIT University, Chennai, Tamil Nadu                  May 2025 – July 2025 \n▪ Researched Automated Feedback Generation using fine-tuned BERT & RoBERTa \ntransformer models. \n▪ Implemented text preprocessing, semantic analysis, and context-aware evaluation \ntechniques in Python (NLP, Transformers). \n▪ Achieved approx.15% improvement in feedback relevance on test datasets. \nProject Intern – MIRAI (AI-Powered Smart Fashion Mirror)- Chennai \n    Dec 2025 –Feb 2025 \n▪ Built backend recommendation engine powering real-time AI smart mirror. \n▪ Implemented vector-based similarity search and optimized retrieval for personalized outfit \nrecommendations. \n▪ Integrated metadata-driven rules with machine learning models to improve \nrecommendation relevance. \n▪ Supported backend APIs by delivering production-ready recommendation artifacts. \n \nRESEARCH & PROJECTS  \n• \nDressFit – AI-Driven Virtual Try-On Platform      \n \n \n       2024                   LINK    \nReact, Flask, Three.js, Blender, WebGL, AI| Personalized 3D avatar scaling and dress \nvisualization using GLB models, deployed on Vercel| Improved avatar-fit accuracy by \napprox.50% using user-measurement-based scaling. \n• \nAI-Podcast generator \n  \n \n \n \n \n \n       2025                 LINK \n Python, GPT-4o, NLP, REST APIs, Streamlit, ElevenLabs API| Dual-Voice Script Generation| \nAutomated 90% of podcast script creation. \n• \nAWS Pet Adoption Platform \n \n \n \n \n \n       2025    \n     LINK \nEC2, RDS, S3, MySQL | Full-stack deployment of dynamic adoption workflows with cloud \nhosting| Reduced page load time by approx.40% through optimized AWS configuration. \n• \nBlockchain Identity Verification  \n \n \n \n \n        2025  \n     LINK \nReact, Node.js, Solidity, Hardhat, Ethers.js | Implemented secure on-chain identity registry \nusing Merkle Trees and smart contracts. \n \nACHIEVEMENTS \n• \nIEEE MPCON 2026 – Paper accepted for oral presentation on Blockchain-based Secure Aid \nDistribution using Zero-Knowledge Proofs."
+            },
+            {
+                "page_number": 2,
+                "text": "• \nSecured 17th place out of 120 teams in Hack-n-Droid 2025 organized by the Android Club, VIT \nChennai. \n• \nSchool Topper in CBSE Class 10 Board Examination. \n \n \nCERTIFICATIONS  \n• \nGEN-AI Using IBM WatsonX \n -IBM Developer Skills Network  \n         \n11th June 2025 \n• \nns-3 Network Simulator Training - IIT Bombay & Spoken Tutorial Project                   March 2025"
+            }
+        ],
+        "full_text": "SRIVARSHA S  \nChennai, India| Phone: +91 6383374683| Email:ssrivarsha06@gmail.com|  Linkedin | Github  \n \nEDUCATION \nVellore Institute of Technology, Chennai | BTech-CSE. |CGPA:8.6|      \n           \n2023- Current \nPushpalata Vidya Mandir, Tirunelveli | 10th Grade: 98% | 12th Grade: 94% |             \n2012- 23  \n \nSKILLS  \n• Programming & Languages : Python, C/C++, Java, HTML, CSS, JavaScript, Dart \n• Frameworks & Libraries    \n: Flask, React.js, Node.js, Flutter, Three.js \n• Cloud & Databases  \n: AWS, Firebase, MongoDB, MySQL \n• DevOps & Tools \n \n: Git, Docker, Postman, Linux, Jupyter Notebook, VS Code, MS   \n• APIs & Security \n \n: REST APIs, JWT Authentication, OAuth 2.0, Cryptography \n• Design & Frontend Technologies: UI/UX Design, WebGL, GLTFLoader, Blender \n• AI/ML & Data Technologies : Transformers, NLP, Computer Vision, AI/ML Integration,  \n  TensorFlow, PyTorch, HuggingFace \n• Linguistic Languages \n: English, Tamil- Proficient, Hindi- Intermediate, German- Basics \n \nEXPERIENCE  \nSummer Research Internship -VIT University, Chennai, Tamil Nadu                  May 2025 – July 2025 \n▪ Researched Automated Feedback Generation using fine-tuned BERT & RoBERTa \ntransformer models. \n▪ Implemented text preprocessing, semantic analysis, and context-aware evaluation \ntechniques in Python (NLP, Transformers). \n▪ Achieved approx.15% improvement in feedback relevance on test datasets. \nProject Intern – MIRAI (AI-Powered Smart Fashion Mirror)- Chennai \n    Dec 2025 –Feb 2025 \n▪ Built backend recommendation engine powering real-time AI smart mirror. \n▪ Implemented vector-based similarity search and optimized retrieval for personalized outfit \nrecommendations. \n▪ Integrated metadata-driven rules with machine learning models to improve \nrecommendation relevance. \n▪ Supported backend APIs by delivering production-ready recommendation artifacts. \n \nRESEARCH & PROJECTS  \n• \nDressFit – AI-Driven Virtual Try-On Platform      \n \n \n       2024                   LINK    \nReact, Flask, Three.js, Blender, WebGL, AI| Personalized 3D avatar scaling and dress \nvisualization using GLB models, deployed on Vercel| Improved avatar-fit accuracy by \napprox.50% using user-measurement-based scaling. \n• \nAI-Podcast generator \n  \n \n \n \n \n \n       2025                 LINK \n Python, GPT-4o, NLP, REST APIs, Streamlit, ElevenLabs API| Dual-Voice Script Generation| \nAutomated 90% of podcast script creation. \n• \nAWS Pet Adoption Platform \n \n \n \n \n \n       2025    \n     LINK \nEC2, RDS, S3, MySQL | Full-stack deployment of dynamic adoption workflows with cloud \nhosting| Reduced page load time by approx.40% through optimized AWS configuration. \n• \nBlockchain Identity Verification  \n \n \n \n \n        2025  \n     LINK \nReact, Node.js, Solidity, Hardhat, Ethers.js | Implemented secure on-chain identity registry \nusing Merkle Trees and smart contracts. \n \nACHIEVEMENTS \n• \nIEEE MPCON 2026 – Paper accepted for oral presentation on Blockchain-based Secure Aid \nDistribution using Zero-Knowledge Proofs.\n\n• \nSecured 17th place out of 120 teams in Hack-n-Droid 2025 organized by the Android Club, VIT \nChennai. \n• \nSchool Topper in CBSE Class 10 Board Examination. \n \n \nCERTIFICATIONS  \n• \nGEN-AI Using IBM WatsonX \n -IBM Developer Skills Network  \n         \n11th June 2025 \n• \nns-3 Network Simulator Training - IIT Bombay & Spoken Tutorial Project                   March 2025",
+        "error": null
+    }
+]

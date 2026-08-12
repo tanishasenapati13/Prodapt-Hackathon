@@ -4,7 +4,6 @@ import faiss
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
-RESUME_FILE = "output/extracted_resumes.json"
 JD_FILE = "data/jd.json"
 VECTOR_DIR = "vector_store"
 
@@ -29,7 +28,9 @@ def load_resumes():
         if os.path.exists(path):
             with open(path, "r", encoding="utf-8") as f:
                 data = json.load(f)
-                if isinstance(data, list):
+                if isinstance(data, dict) and "resumes" in data:
+                    return data["resumes"]
+                elif isinstance(data, list):
                     return data
 
     resumes = []
@@ -46,18 +47,39 @@ def resume_to_text(resume):
         return resume["full_text"]
 
     parts = []
-    candidate_name = resume.get("candidate", {}).get("name") or resume.get("candidate_name", "")
-    if candidate_name:
-        parts.append(f"Candidate: {candidate_name}")
+    cand = resume.get("candidate") or {}
+    cand_name = cand.get("name") or resume.get("candidate_name") or ""
+    if cand_name:
+        parts.append(f"Candidate: {cand_name}")
+
+    summary = resume.get("summary")
+    if summary:
+        parts.append(f"Summary: {summary}")
 
     skills = resume.get("skills", [])
     if skills:
-        parts.append("Skills: " + ", ".join(str(s) for s in skills))
+        parts.append("Skills: " + ", ".join(str(s) for s in skills if s))
 
-    sections = resume.get("sections", {})
-    for sec_name, sec_content in sections.items():
-        if sec_content:
-            parts.append(f"{sec_name.capitalize()}:\n{sec_content}")
+    experience = resume.get("experience", [])
+    for exp in experience:
+        role = exp.get("role", "")
+        company = exp.get("company", "")
+        resps = " ".join(exp.get("responsibilities", []))
+        techs = ", ".join(exp.get("technologies_used", []))
+        parts.append(f"Experience: {role} at {company}. {resps} Technologies: {techs}")
+
+    projects = resume.get("projects", [])
+    for proj in projects:
+        pname = proj.get("project_name") or proj.get("name") or ""
+        pdesc = proj.get("description", "")
+        ptechs = ", ".join(proj.get("technologies_used", []))
+        parts.append(f"Project: {pname}. {pdesc} Technologies: {ptechs}")
+
+    education = resume.get("education", [])
+    for edu in education:
+        degree = edu.get("degree", "")
+        inst = edu.get("institution", "")
+        parts.append(f"Education: {degree} from {inst}")
 
     return "\n".join(parts)
 
@@ -117,10 +139,10 @@ def create_resume_vector_store(resumes):
         resume_texts.append(text)
 
         resume_id = resume.get("resume_id")
-        candidate_name = resume.get("candidate", {}).get("name") or resume.get("candidate_name", "")
-        emails = resume.get("candidate", {}).get("emails") or []
-        email = emails[0] if emails else (resume.get("email") or resume.get("candidate_email") or "")
-        filename = resume.get("file", {}).get("filename") or resume.get("resume_filename") or f"{resume_id}.pdf"
+        cand = resume.get("candidate") or {}
+        candidate_name = cand.get("name") or resume.get("candidate_name") or ""
+        email = cand.get("email") or (cand.get("emails") or [""])[0] or resume.get("email") or resume.get("candidate_email") or ""
+        filename = resume.get("filename") or resume.get("file", {}).get("filename") or resume.get("resume_filename") or f"{resume_id}.pdf"
 
         metadata.append({
             "vector_id": vector_id,

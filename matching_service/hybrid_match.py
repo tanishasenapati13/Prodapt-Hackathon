@@ -40,27 +40,75 @@ def normalize_skill(skill):
     }
     return replacements.get(skill, skill)
 
-def extract_resume_skill_set(resume):
-    raw_skills = resume.get("skills", [])
-    full_text = resume.get("full_text", "")
-    
-    combined_tokens = set()
-    for s in raw_skills:
-        # Split tokens on common delimiters
-        parts = re.split(r'[,:;•/|\n]', str(s))
-        for p in parts:
-            p_clean = p.strip()
-            if p_clean and len(p_clean) < 40:
-                combined_tokens.add(normalize_skill(p_clean))
+def resume_to_text(resume):
+    if resume.get("full_text"):
+        return resume["full_text"]
 
-    if full_text:
-        text_lower = full_text.lower()
+    parts = []
+    cand = resume.get("candidate") or {}
+    cand_name = cand.get("name") or resume.get("candidate_name") or ""
+    if cand_name:
+        parts.append(f"Candidate: {cand_name}")
+
+    summary = resume.get("summary")
+    if summary:
+        parts.append(f"Summary: {summary}")
+
+    skills = resume.get("skills", [])
+    if skills:
+        parts.append("Skills: " + ", ".join(str(s) for s in skills if s))
+
+    experience = resume.get("experience", [])
+    for exp in experience:
+        role = exp.get("role", "")
+        company = exp.get("company", "")
+        resps = " ".join(exp.get("responsibilities", []))
+        techs = ", ".join(exp.get("technologies_used", []))
+        parts.append(f"Experience: {role} at {company}. {resps} Technologies: {techs}")
+
+    projects = resume.get("projects", [])
+    for proj in projects:
+        pname = proj.get("project_name") or proj.get("name") or ""
+        pdesc = proj.get("description", "")
+        ptechs = ", ".join(proj.get("technologies_used", []))
+        parts.append(f"Project: {pname}. {pdesc} Technologies: {ptechs}")
+
+    education = resume.get("education", [])
+    for edu in education:
+        degree = edu.get("degree", "")
+        inst = edu.get("institution", "")
+        parts.append(f"Education: {degree} from {inst}")
+
+    return "\n".join(parts)
+
+def extract_resume_skill_set(resume):
+    combined_tokens = set()
+
+    for s in resume.get("skills", []):
+        s_str = str(s).strip()
+        if s_str:
+            combined_tokens.add(normalize_skill(s_str))
+
+    for exp in resume.get("experience", []):
+        for tech in exp.get("technologies_used", []):
+            if tech:
+                combined_tokens.add(normalize_skill(str(tech).strip()))
+
+    for proj in resume.get("projects", []):
+        for tech in proj.get("technologies_used", []):
+            if tech:
+                combined_tokens.add(normalize_skill(str(tech).strip()))
+
+    text_content = resume.get("full_text") or resume_to_text(resume)
+    if text_content:
+        text_lower = text_content.lower()
         common_tech_skills = [
             "python", "java", "c++", "c", "javascript", "typescript", "react", "node", "fastapi",
             "django", "flask", "sql", "postgresql", "mysql", "mongodb", "redis", "docker",
             "kubernetes", "aws", "azure", "gcp", "git", "github", "ci/cd", "linux", "rest api",
             "rest apis", "microservices", "pytorch", "tensorflow", "pandas", "numpy", "scikit-learn",
-            "machine learning", "nlp", "langchain", "tableau", "hadoop", "r"
+            "machine learning", "nlp", "langchain", "tableau", "hadoop", "r", "cybersecurity",
+            "blockchain", "streamlit", "opencv", "swiftui", "flutter", "firebase"
         ]
         for skill in common_tech_skills:
             if re.search(rf'\b{re.escape(skill)}\b', text_lower):
@@ -87,7 +135,9 @@ def load_resumes():
         if os.path.exists(path):
             with open(path, "r", encoding="utf-8") as f:
                 data = json.load(f)
-                if isinstance(data, list):
+                if isinstance(data, dict) and "resumes" in data:
+                    return data["resumes"]
+                elif isinstance(data, list):
                     return data
 
     resumes = []
@@ -175,14 +225,11 @@ def get_recommendation(score):
 
 def match_single_resume(resume, jd, index, resume_metadata, jd_vector):
     resume_id = resume.get("resume_id")
-    
-    cand_info = resume.get("candidate") or {}
-    candidate_name = cand_info.get("name") or resume.get("candidate_name") or "Candidate"
-    emails = cand_info.get("emails") or []
-    email = emails[0] if emails else (resume.get("email") or resume.get("candidate_email") or "")
-    
-    file_info = resume.get("file") or {}
-    filename = file_info.get("filename") or resume.get("resume_filename") or f"{resume_id}.pdf"
+
+    cand = resume.get("candidate") or {}
+    candidate_name = cand.get("name") or resume.get("candidate_name") or "Candidate"
+    email = cand.get("email") or (cand.get("emails") or [""])[0] or resume.get("email") or resume.get("candidate_email") or ""
+    filename = resume.get("filename") or resume.get("file", {}).get("filename") or resume.get("resume_filename") or f"{resume_id}.pdf"
 
     req_skills = jd.get("required_skills", [])
     resume_skill_set = extract_resume_skill_set(resume)
@@ -219,7 +266,7 @@ def match_single_resume(resume, jd, index, resume_metadata, jd_vector):
 def main():
     print("Loading pre-processed data & vectors...")
     jd, resumes, index, resume_metadata, jd_vector = load_data()
-    print(f"Loaded {len(resumes)} resumes from extracted schema and pre-computed FAISS vector index.")
+    print(f"Loaded {len(resumes)} resumes from updated extracted schema and pre-computed FAISS vector index.")
 
     results = []
     for resume in resumes:
@@ -227,11 +274,11 @@ def main():
         try:
             results.append(match_single_resume(resume, jd, index, resume_metadata, jd_vector))
         except Exception as e:
-            cand_info = resume.get("candidate") or {}
+            cand = resume.get("candidate") or {}
             results.append({
                 "resume_id": resume_id,
-                "candidate_name": cand_info.get("name") or resume.get("candidate_name"),
-                "email": (cand_info.get("emails") or [""])[0] or resume.get("email") or "",
+                "candidate_name": cand.get("name") or resume.get("candidate_name"),
+                "email": cand.get("email") or (cand.get("emails") or [""])[0] or resume.get("email") or "",
                 "status": "failed",
                 "error": str(e),
                 "processed_at": datetime.now(timezone.utc).isoformat()

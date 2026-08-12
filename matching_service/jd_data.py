@@ -227,11 +227,11 @@ def main():
     print("\nExtracted information:")
     print("\nRequired skills:")
     for skill in final_jd["required_skills"]:
-        print(f"  ✓ {skill}")
+        print(f"  - {skill}")
 
     print("\nPreferred skills:")
     for skill in final_jd["preferred_skills"]:
-        print(f"  • {skill}")
+        print(f"  * {skill}")
 
     print("\nRequired experience:", final_jd["required_experience_years"])
 

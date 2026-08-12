@@ -1,0 +1,30 @@
+[
+  {
+    "vector_id": 0,
+    "resume_id": "67c6933dd90fc023",
+    "candidate_name": "RAMYA NAKSHATHRA",
+    "email": "rramya1446@gmail.com",
+    "resume_filename": "Ramya Resume.pdf"
+  },
+  {
+    "vector_id": 1,
+    "resume_id": "887122e018f3d2fa",
+    "candidate_name": "Sarthak Bharadwaj",
+    "email": "sarthakbh321@gmail.com",
+    "resume_filename": "Sarthak.pdf"
+  },
+  {
+    "vector_id": 2,
+    "resume_id": "e303a4290b655f6e",
+    "candidate_name": "Shruti S",
+    "email": "shrutiselvakkumar06@gmail.com",
+    "resume_filename": "Shruti Resume.pdf"
+  },
+  {
+    "vector_id": 3,
+    "resume_id": "8f669cadc98784b7",
+    "candidate_name": "SRIVARSHA S",
+    "email": "ssrivarsha06@gmail.com",
+    "resume_filename": "Srivarsha-RESUME.pdf"
+  }
+]
